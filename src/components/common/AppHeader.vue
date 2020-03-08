@@ -1,43 +1,88 @@
 <template>
 	<el-container>
 		<el-header class="app-header">
-			<!-- <el-button @click="toggleDrawer" type="primary">
-				open
-			</el-button> -->
-			<div class="search-box-wrapper">
-				<el-autocomplete
-					class="search-book-box"
-					popper-class="search-book-dropdown"
-					placeholder="Please input"
-					v-model="search"
-					:clearable="true"
-					:fetch-suggestions="querySearch"
-					:trigger-on-focus="false"
-					@select="handleSelect"
-				>
-					<el-button
-						@click="handleIconClick"
-						slot="append"
-						icon="el-icon-search"
-					></el-button>
-					<template slot-scope="{ item }">
-						<el-image
-							class="image"
-							:srcset="item.srcset"
-							fit="cover"
-						></el-image>
-						<div>
-							<p class="name">{{ item.name }}</p>
-							<p class="name">{{ item.name }}</p>
-						</div>
-					</template>
-				</el-autocomplete>
+			<div class="header-wrapper">
+				<el-row>
+					<el-row>
+						<el-col :xs="4" :sm="2" :md="2" :lg="2" :xl="2">
+							<el-button
+								icon="el-icon-menu"
+								@click="toggleDrawer"
+								circle
+							></el-button>
+						</el-col>
+						<el-col :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
+							<div class="search-box-wrapper">
+								<el-autocomplete
+									class="search-book-box"
+									popper-class="search-book-dropdown"
+									placeholder="Please input"
+									v-model="search"
+									:clearable="true"
+									:fetch-suggestions="querySearch"
+									:trigger-on-focus="false"
+									@select="handleSelect"
+								>
+									<el-button
+										@click="handleIconClick"
+										slot="append"
+										icon="el-icon-search"
+									></el-button>
+									<template slot-scope="{ item }">
+										<el-image
+											class="image"
+											:srcset="item.srcset"
+											fit="cover"
+										></el-image>
+										<div>
+											<p class="name">{{ item.name }}</p>
+											<p class="name">{{ item.name }}</p>
+										</div>
+									</template>
+								</el-autocomplete>
+							</div>
+						</el-col>
+						<el-col
+							:xs="4"
+							:sm="6"
+							:md="6"
+							:lg="6"
+							:xl="6"
+							class="avatar-wrapper"
+						>
+							<el-dropdown v-if="isLogin" trigger="click">
+								<el-avatar
+									class="avatar"
+									:size="avatar.size"
+									:src="avatar.src"
+									:icon="avatar.src ? null : 'el-icon-user-solid'"
+									@click.native="dropDownMenu"
+								></el-avatar>
+								<el-dropdown-menu slot="dropdown">
+									<el-dropdown-item>Go to profile</el-dropdown-item>
+									<el-dropdown-item>Go to add book</el-dropdown-item>
+								</el-dropdown-menu>
+							</el-dropdown>
+							<el-avatar
+								v-else
+								style="background-color: red;"
+								class="avatar"
+								:size="avatar.size"
+								@click.native="goToLogin"
+							>
+								<font-awesome-icon icon="sign-in-alt" />
+							</el-avatar>
+						</el-col>
+					</el-row>
+				</el-row>
 			</div>
 		</el-header>
 	</el-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
 	name: 'AppHeader',
 	component: {},
@@ -45,6 +90,10 @@ export default {
 		return {
 			links: [],
 			search: '',
+			avatar: {
+				size: 'large',
+				src: null,
+			},
 		};
 	},
 	methods: {
@@ -124,6 +173,16 @@ export default {
 			// TODO: replace vuex
 			this.$bus.$emit('toggle', true);
 		},
+		goToLogin() {
+			console.log('trest');
+		},
+		dropDownMenu() {
+			console.log('dropDownMenu');
+		},
+	},
+	computed: {
+		// getter를 객체 전개 연산자(Object Spread Operator)로 계산하여 추가합니다.
+		...mapGetters(['isLogin']),
 	},
 	mounted() {
 		this.links = this.loadAll();
@@ -174,12 +233,17 @@ $variable-top: 60px;
 	left: 0;
 	width: 100%;
 	height: $variable-top;
-}
-.search-box-wrapper {
-	max-width: 80%;
-	padding: 10px 0;
-	.search-book-box {
-		width: 100%;
+	.header-wrapper {
+		padding: 10px 0;
+		.search-book-box {
+			width: 100%;
+		}
+		.avatar-wrapper {
+			text-align: right;
+			.avatar {
+				cursor: pointer;
+			}
+		}
 	}
 }
 </style>
