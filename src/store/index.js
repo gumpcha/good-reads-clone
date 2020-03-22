@@ -6,11 +6,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		user: {
-			isLoggedIn: true,
+			isLoggedIn: false,
 		},
 	},
 	getters: {
-		isLogin: state => {
+		loggedIn: state => {
 			return state.user.isLoggedIn;
 		},
 	},

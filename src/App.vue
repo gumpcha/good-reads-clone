@@ -19,6 +19,13 @@ export default {
 			layout: ComplexLayout,
 		};
 	},
+	watch: {
+		$route(to) {
+			if (to.name === 'login') {
+				this.layout = SingleLayout;
+			}
+		},
+	},
 };
 </script>
 

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from 'Views/Home.vue';
+import store from '../store';
+import { Message } from 'element-ui';
 
 Vue.use(VueRouter);
 
@@ -22,26 +24,28 @@ Vue.use(VueRouter);
 const routes = [
 	{
 		path: '/',
-		name: 'Home',
+		name: 'home',
 		component: Home,
 	},
 	{
 		path: '/login',
-		name: 'Login',
+		name: 'login',
 		component: () =>
 			import(/* webpackChunkName: "login" */ '../views/Login.vue'),
 	},
 	{
-		path: '/list',
-		name: 'List',
-		component: () => import(/* webpackChunkName: "list" */ '../views/List.vue'),
+		path: '/profile',
+		name: 'profile',
+		component: () =>
+			import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/addBook',
-		name: 'AddBook',
+		name: 'addBook',
 		component: () =>
 			import(/* webpackChunkName: "addBook" */ '../views/AddBook.vue'),
-		meta: { authRequired: true },
+		meta: { requiresAuth: true },
 	},
 ];
 
@@ -52,20 +56,21 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-	// to: 이동할 url에 해당하는 라우팅 객체
-	if (
-		to.matched.some(routeInfo => {
-			return routeInfo.meta.authRequired;
-		})
-	) {
-		// 이동할 페이지에 인증 정보가 필요하면 경고 창을 띄우고 페이지 전환은 하지 않음
-		if (confirm('Get the fuck out of here🦶🦶🦶')) {
-			console.log('ok');
+	if (to.matched.some(record => record.meta.requiresAuth)) {
+		// 이 라우트는 인증이 필요하며 로그인 한 경우 확인하십시오.
+		// 그렇지 않은 경우 로그인 페이지로 리디렉션하십시오.
+		if (!store.getters.loggedIn) {
+			Message({
+				showClose: true,
+				message: 'Warning, this is a warning message.',
+				type: 'warning',
+			});
+			next({ name: 'login' });
+		} else {
+			next();
 		}
-		// next({ name: '/' });
 	} else {
-		console.log("routing success : '" + to.path + "'");
-		next(); // 페이지 전환
+		next(); // 반드시 next()를 호출하십시오!
 	}
 });
 

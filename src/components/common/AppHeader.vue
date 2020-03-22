@@ -50,7 +50,7 @@
 							:xl="6"
 							class="avatar-wrapper"
 						>
-							<el-dropdown v-if="isLogin" trigger="click">
+							<el-dropdown v-if="loggedIn" trigger="click">
 								<el-avatar
 									class="avatar"
 									:size="avatar.size"
@@ -182,7 +182,7 @@ export default {
 	},
 	computed: {
 		// getter를 객체 전개 연산자(Object Spread Operator)로 계산하여 추가합니다.
-		...mapGetters(['isLogin']),
+		...mapGetters(['loggedIn']),
 	},
 	mounted() {
 		this.links = this.loadAll();

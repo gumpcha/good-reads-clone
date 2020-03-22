@@ -12,4 +12,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.single-main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+</style>
