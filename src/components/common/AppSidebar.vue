@@ -6,40 +6,29 @@
 		size="20%"
 	>
 		<el-menu
-			default-active="2"
+			:default-active="active"
 			class="el-menu-vertical-demo"
 			background-color="#545c64"
 			text-color="#fff"
 			active-text-color="#ffd04b"
 		>
-			<el-submenu index="1">
-				<template slot="title">
-					<i class="el-icon-location"></i>
-					<span>Navigator One</span>
-				</template>
-				<el-menu-item-group title="Group One">
-					<el-menu-item index="1-1">item one</el-menu-item>
-					<el-menu-item index="1-2">item one</el-menu-item>
-				</el-menu-item-group>
-				<el-menu-item-group title="Group Two">
-					<el-menu-item index="1-3">item three</el-menu-item>
-				</el-menu-item-group>
-				<el-submenu index="1-4">
-					<template slot="title">item four</template>
-					<el-menu-item index="1-4-1">item one</el-menu-item>
-				</el-submenu>
-			</el-submenu>
-			<el-menu-item index="2">
-				<i class="el-icon-menu"></i>
-				<span>Navigator Two</span>
+			<el-menu-item index="home" @click="goToPage('home')">
+				<span class="icon-menu">
+					<i class="fas fa-home"></i>
+				</span>
+				<span>Home</span>
 			</el-menu-item>
-			<el-menu-item index="3" disabled>
-				<i class="el-icon-document"></i>
-				<span>Navigator Three</span>
+			<el-menu-item index="profile" @click="goToPage('profile')">
+				<span class="icon-menu">
+					<i class="fas fa-user"></i>
+				</span>
+				<span>Profile</span>
 			</el-menu-item>
-			<el-menu-item index="4">
-				<i class="el-icon-setting"></i>
-				<span>Navigator Four</span>
+			<el-menu-item index="addBook" @click="goToPage('addBook')">
+				<span class="icon-menu">
+					<i class="fas fa-book"></i>
+				</span>
+				<span>Add New Book</span>
 			</el-menu-item>
 		</el-menu>
 	</el-drawer>
@@ -52,16 +41,22 @@ export default {
 		return {
 			drawer: false,
 			direction: 'ltr',
+			active: 'home',
 		};
 	},
 	methods: {
 		handleClose(done) {
 			done();
-			// this.$confirm('Are you sure you want to close this?')
-			// 	.then(() => {
-			// 		done();
-			// 	})
-			// 	.catch(() => {});
+		},
+		goToPage(name) {
+			this.$router.push({ name: name }, () => {});
+		},
+	},
+	watch: {
+		$route(to, from) {
+			if (from.name && to.name) {
+				this.active = to.name;
+			}
 		},
 	},
 	mounted() {
@@ -83,5 +78,13 @@ export default {
 .app-el-menu-vertical:not(.el-menu--collapse) {
 	width: 200px;
 	// min-height: 100%;
+}
+.icon-menu {
+	display: inline-block;
+	width: 24px;
+	margin-right: 5px;
+	text-align: center;
+	font-size: 16px;
+	vertical-align: baseline;
 }
 </style>

@@ -34,9 +34,6 @@
 					Login
 				</el-button>
 			</el-form-item>
-			<a class="forgot-password" href="https://oxfordinformatics.com/">
-				Forgot password ?
-			</a>
 		</el-form>
 	</el-card>
 </template>
@@ -45,6 +42,13 @@
 export default {
 	name: 'Login',
 	data() {
+		let emailValidate = (rule, value, callback) => {
+			// let regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			if (!regex.test(value)) {
+				return callback(new Error('Email format does not fit'));
+			}
+		};
 		return {
 			validCredentials: {
 				email: 'lightscope',
@@ -62,12 +66,13 @@ export default {
 						message: 'Email is required',
 						trigger: 'blur',
 					},
+					{ validator: emailValidate, trigger: 'blur' },
 				],
 				password: [
 					{ required: true, message: 'Password is required', trigger: 'blur' },
 					{
-						min: 5,
-						message: 'Password length should be at least 5 characters',
+						min: 8,
+						message: 'Password length should be at least 8 characters',
 						trigger: 'blur',
 					},
 				],

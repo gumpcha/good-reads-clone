@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<component :is="layout"></component>
+		<component :is="$route.meta.layout"></component>
 	</div>
 </template>
 
@@ -18,13 +18,6 @@ export default {
 		return {
 			layout: ComplexLayout,
 		};
-	},
-	watch: {
-		$route(to) {
-			if (to.name === 'login') {
-				this.layout = SingleLayout;
-			}
-		},
 	},
 };
 </script>

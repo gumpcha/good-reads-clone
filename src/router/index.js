@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import Home from 'Views/Home.vue';
 import store from '../store';
 import { Message } from 'element-ui';
+import ComplexLayout from 'Components/layout/ComplexLayout';
+import SingleLayout from 'Components/layout/SingleLayout';
 
 Vue.use(VueRouter);
 
@@ -26,26 +28,30 @@ const routes = [
 		path: '/',
 		name: 'home',
 		component: Home,
-	},
-	{
-		path: '/login',
-		name: 'login',
-		component: () =>
-			import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+		meta: { layout: ComplexLayout },
 	},
 	{
 		path: '/profile',
 		name: 'profile',
 		component: () =>
 			import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
-		meta: { requiresAuth: true },
+		meta: { layout: ComplexLayout, requiresAuth: true },
 	},
 	{
 		path: '/addBook',
 		name: 'addBook',
 		component: () =>
 			import(/* webpackChunkName: "addBook" */ '../views/AddBook.vue'),
-		meta: { requiresAuth: true },
+		meta: { layout: ComplexLayout, requiresAuth: true },
+	},
+	// -----------------------------------------------
+	// NOTE: From here it is a single component
+	{
+		path: '/login',
+		name: 'login',
+		component: () =>
+			import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+		meta: { layout: SingleLayout },
 	},
 ];
 
@@ -62,7 +68,7 @@ router.beforeEach((to, from, next) => {
 		if (!store.getters.loggedIn) {
 			Message({
 				showClose: true,
-				message: 'Warning, this is a warning message.',
+				message: 'Available after login.',
 				type: 'warning',
 			});
 			next({ name: 'login' });
