@@ -25,6 +25,7 @@
 			</el-form-item>
 			<el-form-item>
 				<el-button
+					:disabled="disabled"
 					:loading="loading"
 					class="login-button"
 					type="primary"
@@ -43,11 +44,24 @@ export default {
 	name: 'Login',
 	data() {
 		let emailValidate = (rule, value, callback) => {
-			// let regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-			let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 			if (!regex.test(value)) {
+				this.validation.email = false;
 				return callback(new Error('Email format does not fit'));
 			}
+			this.validation.email = true;
+		};
+		let passwordValidate = (rule, value, callback) => {
+			const regex = /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9])(?=.*[0-9]).{8,16}$/;
+			if (!regex.test(value)) {
+				this.validation.password = false;
+				return callback(
+					new Error(
+						'PPlease write your password in a combination of English letters, numbers and special characters with a minimum of 8 characters and a maximum of 16 characters',
+					),
+				);
+			}
+			this.validation.password = true;
 		};
 		return {
 			validCredentials: {
@@ -66,16 +80,26 @@ export default {
 						message: 'Email is required',
 						trigger: 'blur',
 					},
-					{ validator: emailValidate, trigger: 'blur' },
-				],
-				password: [
-					{ required: true, message: 'Password is required', trigger: 'blur' },
 					{
-						min: 8,
-						message: 'Password length should be at least 8 characters',
-						trigger: 'blur',
+						validator: emailValidate,
+						trigger: 'change',
 					},
 				],
+				password: [
+					{
+						required: true,
+						message: 'Password is required',
+						trigger: 'blur',
+					},
+					{
+						validator: passwordValidate,
+						trigger: 'change',
+					},
+				],
+			},
+			validation: {
+				email: false,
+				password: false,
 			},
 		};
 	},
@@ -86,10 +110,6 @@ export default {
 			});
 		},
 		async login() {
-			let valid = await this.$refs.form.validate();
-			if (!valid) {
-				return;
-			}
 			this.loading = true;
 			await this.simulateLogin();
 			this.loading = false;
@@ -101,6 +121,11 @@ export default {
 			} else {
 				this.$message.error('Email or password is invalid');
 			}
+		},
+	},
+	computed: {
+		disabled() {
+			return !(this.validation.email && this.validation.password);
 		},
 	},
 };
