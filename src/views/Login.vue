@@ -105,9 +105,17 @@ export default {
 	},
 	methods: {
 		simulateLogin() {
-			return new Promise(resolve => {
-				setTimeout(resolve, 800);
-			});
+			return this.$https
+				.get('/user/session', {
+					email: this.model.email,
+					password: this.model.password,
+				})
+				.then(res => {
+					console.log(res);
+				});
+			// return new Promise(resolve => {
+			// 	setTimeout(resolve, 800);
+			// });
 		},
 		async login() {
 			this.loading = true;
@@ -121,6 +129,9 @@ export default {
 			} else {
 				this.$message.error('Email or password is invalid');
 			}
+		},
+		async signUp() {
+			this.loading = true;
 		},
 	},
 	computed: {

@@ -1,0 +1,11 @@
+{
+  "editor.tabSize": 2,
+  "prettier.trailingComma": "all",
+  "prettier.useTabs": true,
+  "prettier.htmlWhitespaceSensitivity": "ignore",
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "files.autoSave": "afterDelay",
+  "editor.fontSize": 11,
+  "prettier.arrowParens": "avoid"
+}
