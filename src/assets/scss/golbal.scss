@@ -25,3 +25,35 @@ $variable-top: 60px;
 	// background-color: red;
 }
 // ----------------------------------------------------------------
+
+// ----------------------------------------------------------------
+// Notification
+.notification-success {
+	background-color: #67c23a;
+	.el-notification__title,
+	.el-notification__content {
+		color: white;
+	}
+}
+.notification-warning {
+	background-color: #e6a23c;
+	.el-notification__title,
+	.el-notification__content {
+		color: white;
+	}
+}
+.notification-danger {
+	background-color: #f56c6c;
+	.el-notification__title,
+	.el-notification__content {
+		color: white;
+	}
+}
+.notification-info {
+	background-color: #909399;
+	.el-notification__title,
+	.el-notification__content {
+		color: white;
+	}
+}
+// ----------------------------------------------------------------

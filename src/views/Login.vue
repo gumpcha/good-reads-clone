@@ -29,14 +29,14 @@
 							:loading="loading"
 							class="login-button"
 							type="primary"
-							@click="validateEmail"
+							@click="registeredUser"
 							block
 						>
 							계속하기
 						</el-button>
 					</el-form-item>
 				</el-tab-pane>
-				<el-tab-pane label="sign-up" name="getPassword">
+				<el-tab-pane label="sign-in" name="getPassword">
 					<el-form-item prop="password">
 						<el-input
 							v-model="model.password"
@@ -56,6 +56,36 @@
 							block
 						>
 							로그인
+						</el-button>
+					</el-form-item>
+				</el-tab-pane>
+				<el-tab-pane label="sign-up" name="register">
+					<el-form-item prop="email">
+						<el-input
+							v-model="model.email"
+							placeholder="Email"
+							prefix-icon="fas fa-envelope-square"
+						></el-input>
+					</el-form-item>
+					<el-form-item prop="password">
+						<el-input
+							v-model="model.password"
+							placeholder="Password"
+							type="password"
+							prefix-icon="fas fa-lock"
+							show-password
+						></el-input>
+					</el-form-item>
+					<el-form-item>
+						<el-button
+							:disabled="disabledPassword"
+							:loading="loading"
+							class="login-button"
+							type="primary"
+							@click="signUp"
+							block
+						>
+							가입하기
 						</el-button>
 					</el-form-item>
 				</el-tab-pane>
@@ -184,14 +214,28 @@ export default {
 			// 	.then(res => {
 			// 		console.log(res);
 			// 	});
-			return new Promise(resolve => {
-				setTimeout(resolve, 800);
+			return new Promise((resolve, reject) => {
+				setTimeout(reject, 800);
 			});
 		},
-		async validateEmail() {
+		async registeredUser() {
 			this.loading = true;
-			await this.simulateLogin();
-			this.activeName = 'getPassword';
+			await this.simulateLogin()
+				.then(response => {
+					console.log(response);
+					this.activeName = 'getPassword';
+				})
+				.catch(error => {
+					console.error(error);
+					this.$notify({
+						title: '주의',
+						dangerouslyUseHTMLString: true,
+						message: `<strong><i>${this.model.email}</i></strong> 등록되지 않은 이메일입니다.`,
+						duration: 3000,
+						customClass: 'notification-danger',
+					});
+					this.activeName = 'register';
+				});
 			this.loading = false;
 		},
 		async signIn() {
@@ -199,8 +243,8 @@ export default {
 			await this.simulateLogin();
 			this.loading = false;
 			if (
-				this.model.email === this.validCredentials.email &&
-				this.model.password === this.validCredentials.password
+				this.model.email === this.validation.email &&
+				this.model.password === this.validation.password
 			) {
 				this.$message.success('Login successfull');
 			} else {
@@ -210,7 +254,12 @@ export default {
 		async signUp() {
 			this.loading = true;
 		},
-		goBack() {},
+		goBack() {
+			this.activeName = 'getEmail';
+			// if (this.activeName === 'getPassword') {
+			// 	this.activeName = 'getEmail';
+			// } else if (this.activeName === 'register') {}
+		},
 	},
 	computed: {
 		disabledEmail() {
