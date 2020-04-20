@@ -10,12 +10,13 @@
 		>
 			<!-- 이메일 입력단계가 아닌 비밀번호 입력단계로 넘어갔을 떄만 작동 -->
 			<el-page-header
-				v-if="activeName !== 'getEmail'"
-				@back="goBack"
+				v-if="activeName !== 'signIn'"
+				@back="goSignIn"
 				:content="getTitle"
 			></el-page-header>
 			<el-tabs v-model="activeName">
-				<el-tab-pane label="sign-in" name="getEmail">
+				<el-tab-pane label="sign-in" name="signIn">
+					<h2>로그인</h2>
 					<el-form-item prop="email">
 						<el-input
 							v-model="model.email"
@@ -23,20 +24,6 @@
 							prefix-icon="fas fa-envelope-square"
 						></el-input>
 					</el-form-item>
-					<el-form-item>
-						<el-button
-							:disabled="disabledEmail"
-							:loading="loading"
-							class="login-button"
-							type="primary"
-							@click="registeredUser"
-							block
-						>
-							계속하기
-						</el-button>
-					</el-form-item>
-				</el-tab-pane>
-				<el-tab-pane label="sign-in" name="getPassword">
 					<el-form-item prop="password">
 						<el-input
 							v-model="model.password"
@@ -48,7 +35,7 @@
 					</el-form-item>
 					<el-form-item>
 						<el-button
-							:disabled="disabledPassword"
+							:disabled="disabledButton"
 							:loading="loading"
 							class="login-button"
 							type="primary"
@@ -58,8 +45,19 @@
 							로그인
 						</el-button>
 					</el-form-item>
+					<el-form-item>
+						<el-button
+							:loading="loading"
+							class="login-button"
+							type="success"
+							@click="activeName = 'signUp'"
+							block
+						>
+							가입하기
+						</el-button>
+					</el-form-item>
 				</el-tab-pane>
-				<el-tab-pane label="sign-up" name="register">
+				<el-tab-pane label="sign-up" name="signUp">
 					<el-form-item prop="email">
 						<el-input
 							v-model="model.email"
@@ -78,10 +76,10 @@
 					</el-form-item>
 					<el-form-item>
 						<el-button
-							:disabled="disabledPassword"
+							:disabled="disabledButton"
 							:loading="loading"
 							class="login-button"
-							type="primary"
+							type="success"
 							@click="signUp"
 							block
 						>
@@ -90,46 +88,6 @@
 					</el-form-item>
 				</el-tab-pane>
 			</el-tabs>
-
-			<!-- <el-form-item prop="email">
-				<el-input
-					v-model="model.email"
-					placeholder="Email"
-					prefix-icon="fas fa-envelope-square"
-				></el-input>
-			</el-form-item>
-			<el-form-item prop="password">
-				<el-input
-					v-model="model.password"
-					placeholder="Password"
-					type="password"
-					prefix-icon="fas fa-lock"
-					show-password
-				></el-input>
-			</el-form-item>
-			<el-form-item>
-				<el-button
-					:disabled="disabled"
-					:loading="loading"
-					class="login-button"
-					type="primary"
-					@click="signIn"
-					block
-				>
-					Sign In
-				</el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button
-					:loading="loading"
-					class="signup-button"
-					type="success"
-					@click="signUp"
-					block
-				>
-					Sign Up
-				</el-button>
-			</el-form-item> -->
 		</el-form>
 	</el-card>
 </template>
@@ -166,7 +124,7 @@ export default {
 		};
 		return {
 			title: 'signIn',
-			activeName: 'getEmail',
+			activeName: 'signIn',
 			validCredentials: {
 				email: 'lightscope',
 				password: 'lightscope',
@@ -218,12 +176,12 @@ export default {
 				setTimeout(reject, 800);
 			});
 		},
-		async registeredUser() {
+		async signUp() {
 			this.loading = true;
 			await this.simulateLogin()
 				.then(response => {
 					console.log(response);
-					this.activeName = 'getPassword';
+					// this.activeName = 'getPassword';
 				})
 				.catch(error => {
 					console.error(error);
@@ -234,7 +192,7 @@ export default {
 						duration: 3000,
 						customClass: 'notification-danger',
 					});
-					this.activeName = 'register';
+					this.activeName = 'signUp';
 				});
 			this.loading = false;
 		},
@@ -251,26 +209,17 @@ export default {
 				this.$message.error('Email or password is invalid');
 			}
 		},
-		async signUp() {
-			this.loading = true;
-		},
-		goBack() {
-			this.activeName = 'getEmail';
-			// if (this.activeName === 'getPassword') {
-			// 	this.activeName = 'getEmail';
-			// } else if (this.activeName === 'register') {}
+		goSignIn() {
+			this.activeName = 'signIn';
 		},
 	},
 	computed: {
-		disabledEmail() {
-			return !this.validation.email;
+		disabledButton() {
+			if (this.activeName === 'signIn') {
+				return !this.validation.email || !this.validation.password;
+			}
+			return !this.validation.email || !this.validation.password;
 		},
-		disabledPassword() {
-			return !this.validation.password;
-		},
-		// isSignInOrSignUp() {
-		// 	return this.title ===
-		// },
 		getTitle() {
 			return this.title === 'signIn' ? '로그인' : '회원가입';
 		},
@@ -282,7 +231,7 @@ export default {
 .login-button,
 .signup-button {
 	width: 100%;
-	margin-top: 20px;
+	// margin-top: 20px;
 }
 .login-form {
 	width: 290px;
