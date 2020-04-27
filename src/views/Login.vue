@@ -12,82 +12,75 @@
 			<el-page-header
 				v-if="activeName !== 'signIn'"
 				@back="goSignIn"
-				:content="getTitle"
+				:content="'회원가입'"
+				style="margin-bottom: 10px;"
 			></el-page-header>
-			<el-tabs v-model="activeName">
-				<el-tab-pane label="sign-in" name="signIn">
-					<h2>로그인</h2>
-					<el-form-item prop="email">
-						<el-input
-							v-model="model.email"
-							placeholder="Email"
-							prefix-icon="fas fa-envelope-square"
-						></el-input>
-					</el-form-item>
-					<el-form-item prop="password">
-						<el-input
-							v-model="model.password"
-							placeholder="Password"
-							type="password"
-							prefix-icon="fas fa-lock"
-							show-password
-						></el-input>
-					</el-form-item>
-					<el-form-item>
-						<el-button
-							:disabled="disabledButton"
-							:loading="loading"
-							class="login-button"
-							type="primary"
-							@click="signIn"
-							block
-						>
-							로그인
-						</el-button>
-					</el-form-item>
-					<el-form-item>
-						<el-button
-							:loading="loading"
-							class="login-button"
-							type="success"
-							@click="activeName = 'signUp'"
-							block
-						>
-							가입하기
-						</el-button>
-					</el-form-item>
-				</el-tab-pane>
-				<el-tab-pane label="sign-up" name="signUp">
-					<el-form-item prop="email">
-						<el-input
-							v-model="model.email"
-							placeholder="Email"
-							prefix-icon="fas fa-envelope-square"
-						></el-input>
-					</el-form-item>
-					<el-form-item prop="password">
-						<el-input
-							v-model="model.password"
-							placeholder="Password"
-							type="password"
-							prefix-icon="fas fa-lock"
-							show-password
-						></el-input>
-					</el-form-item>
-					<el-form-item>
-						<el-button
-							:disabled="disabledButton"
-							:loading="loading"
-							class="login-button"
-							type="success"
-							@click="signUp"
-							block
-						>
-							가입하기
-						</el-button>
-					</el-form-item>
-				</el-tab-pane>
-			</el-tabs>
+			<h2 v-if="activeName === 'signIn'">로그인</h2>
+			<el-form-item prop="email">
+				<el-input
+					v-model="model.email"
+					placeholder="Email"
+					prefix-icon="fas fa-envelope-square"
+				>
+					<el-button
+						v-if="model.email"
+						slot="append"
+						icon="el-icon-close"
+						@click="model.email = null"
+					></el-button>
+				</el-input>
+			</el-form-item>
+			<el-form-item prop="password">
+				<el-input
+					v-model="model.password"
+					placeholder="Password"
+					type="password"
+					prefix-icon="fas fa-lock"
+					show-password
+				>
+					<el-button
+						v-if="model.password"
+						slot="append"
+						icon="el-icon-close"
+						@click="model.password = null"
+					></el-button>
+				</el-input>
+			</el-form-item>
+			<el-form-item class="mt-3" v-if="activeName === 'signIn'">
+				<el-button
+					:disabled="disabledButton"
+					:loading="loading"
+					class="signIn-button"
+					type="primary"
+					@click="signIn"
+					block
+				>
+					로그인
+				</el-button>
+			</el-form-item>
+			<el-form-item v-if="activeName === 'signIn'">
+				<el-button
+					:loading="loading"
+					class="signUp-button"
+					type="success"
+					@click="activeName = 'signUp'"
+					block
+				>
+					회원가입
+				</el-button>
+			</el-form-item>
+			<el-form-item v-if="activeName === 'signUp'">
+				<el-button
+					:disabled="disabledButton"
+					:loading="loading"
+					class="signUp-button"
+					type="success"
+					@click="signUp"
+					block
+				>
+					회원가입
+				</el-button>
+			</el-form-item>
 		</el-form>
 	</el-card>
 </template>
@@ -163,28 +156,40 @@ export default {
 		};
 	},
 	methods: {
-		simulateLogin() {
-			// return this.$https
-			// 	.get('/user/session', {
-			// 		email: this.model.email,
-			// 		password: this.model.password,
-			// 	})
-			// 	.then(res => {
-			// 		console.log(res);
-			// 	});
-			return new Promise((resolve, reject) => {
-				setTimeout(reject, 800);
-			});
+		async signIn() {
+			this.loading = true;
+			await this.$axios
+				.post('/user/session', {
+					email: this.model.email,
+					password: this.model.password,
+				})
+				.then(res => {
+					this.$store.commit('signIn', res.data.access_token);
+					this.$message.success('Login successfull');
+				})
+				.catch(err => {
+					if (err.code == 401) {
+						this.$message.error(err.message);
+					} else {
+						this.$message.error(
+							'유효하지 않은 정보입니다. 확인 후 다시 로그인해주세요.😱',
+						);
+					}
+				});
+			this.loading = false;
 		},
 		async signUp() {
 			this.loading = true;
-			await this.simulateLogin()
-				.then(response => {
-					console.log(response);
-					// this.activeName = 'getPassword';
+			await this.$axios
+				.post('/user', {
+					email: this.model.email,
+					password: this.model.password,
 				})
-				.catch(error => {
-					console.error(error);
+				.then(res => {
+					console.log(res);
+				})
+				.catch(err => {
+					console.error(err);
 					this.$notify({
 						title: '주의',
 						dangerouslyUseHTMLString: true,
@@ -196,21 +201,11 @@ export default {
 				});
 			this.loading = false;
 		},
-		async signIn() {
-			this.loading = true;
-			await this.simulateLogin();
-			this.loading = false;
-			if (
-				this.model.email === this.validation.email &&
-				this.model.password === this.validation.password
-			) {
-				this.$message.success('Login successfull');
-			} else {
-				this.$message.error('Email or password is invalid');
-			}
-		},
 		goSignIn() {
 			this.activeName = 'signIn';
+		},
+		test() {
+			console.log(this.model.email);
 		},
 	},
 	computed: {
@@ -220,18 +215,17 @@ export default {
 			}
 			return !this.validation.email || !this.validation.password;
 		},
-		getTitle() {
-			return this.title === 'signIn' ? '로그인' : '회원가입';
-		},
 	},
 };
 </script>
 
 <style lang="scss">
-.login-button,
-.signup-button {
+.signIn-button,
+.signUp-button {
 	width: 100%;
-	// margin-top: 20px;
+}
+.signIn-button {
+	margin-top: 20px;
 }
 .login-form {
 	width: 290px;

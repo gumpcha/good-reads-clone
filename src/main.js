@@ -12,7 +12,7 @@ axios.defaults.headers.common['Authorization'] = 'Bearer';
 // GET 요청에 추가할 헤더 설정
 axios.defaults.headers.get['Accepts'] = 'application/json';
 
-Vue.prototype.$https = axios;
+Vue.prototype.$axios = axios;
 
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
