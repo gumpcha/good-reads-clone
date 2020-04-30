@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import ComplexLayout from 'Components/layout/ComplexLayout';
-import SingleLayout from 'Components/layout/SingleLayout';
+import ComplexLayout from '@/components/layout/ComplexLayout';
+import SingleLayout from '@/components/layout/SingleLayout';
 
 export default {
 	name: 'App',

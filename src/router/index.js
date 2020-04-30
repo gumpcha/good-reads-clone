@@ -2,10 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { Message } from 'element-ui';
 // NOTE: add my component
-import store from '../store';
-import SingleLayout from 'Components/layout/SingleLayout';
-import ComplexLayout from 'Components/layout/ComplexLayout';
-import Home from 'Views/Home.vue';
+import store from '@/store';
+import SingleLayout from '@/components/layout/SingleLayout';
+import ComplexLayout from '@/components/layout/ComplexLayout';
+import Home from '@/views/Home.vue';
 
 Vue.use(VueRouter);
 

@@ -158,48 +158,39 @@ export default {
 	methods: {
 		async signIn() {
 			this.loading = true;
-			await this.$axios
-				.post('/user/session', {
+			await this.$api
+				.signIn({
 					email: this.model.email,
 					password: this.model.password,
 				})
 				.then(res => {
-					this.$store.commit('signIn', res.data.access_token);
+					this.$store.commit('signIn', res);
 					this.$message.success('Login successfull');
-				})
-				.catch(err => {
-					if (err.code == 401) {
-						this.$message.error(err.message);
-					} else {
-						this.$message.error(
-							'유효하지 않은 정보입니다. 확인 후 다시 로그인해주세요.😱',
-						);
-					}
 				});
 			this.loading = false;
 		},
 		async signUp() {
 			this.loading = true;
-			await this.$axios
-				.post('/user', {
+			await this.$api
+				.singUp({
 					email: this.model.email,
 					password: this.model.password,
 				})
 				.then(res => {
 					console.log(res);
-				})
-				.catch(err => {
-					console.error(err);
-					this.$notify({
-						title: '주의',
-						dangerouslyUseHTMLString: true,
-						message: `<strong><i>${this.model.email}</i></strong> 등록되지 않은 이메일입니다.`,
-						duration: 3000,
-						customClass: 'notification-danger',
-					});
-					this.activeName = 'signUp';
 				});
 			this.loading = false;
+			// .catch(err => {
+			// 	console.error(err);
+			// 	this.$notify({
+			// 		title: '주의',
+			// 		dangerouslyUseHTMLString: true,
+			// 		message: `<strong><i>${this.model.email}</i></strong> 등록되지 않은 이메일입니다.`,
+			// 		duration: 3000,
+			// 		customClass: 'notification-danger',
+			// 	});
+			// 	this.activeName = 'signUp';
+			// });
 		},
 		goSignIn() {
 			this.activeName = 'signIn';

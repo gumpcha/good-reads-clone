@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import AppHeader from 'Components/common/AppHeader';
-import AppSidebar from 'Components/common/AppSidebar';
+import AppHeader from '@/components/common/AppHeader';
+import AppSidebar from '@/components/common/AppSidebar';
 
 export default {
 	name: 'ComplexLayout',

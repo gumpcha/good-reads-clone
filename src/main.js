@@ -1,18 +1,11 @@
 import Vue from 'vue';
 import App from './App.vue';
-import router from './router';
-import store from './store';
-import axios from 'axios';
-import './plugins/element.js';
+import router from '@/router';
+import store from '@/store';
+import '@/plugins/element.js';
 
-// baseURL 기본값을 정의한다
-axios.defaults.baseURL = 'https://good-reads-clone-api-express.herokuapp.com';
-// 모든 요청에 추가할 헤더 설정
-axios.defaults.headers.common['Authorization'] = 'Bearer';
-// GET 요청에 추가할 헤더 설정
-axios.defaults.headers.get['Accepts'] = 'application/json';
-
-Vue.prototype.$axios = axios;
+import api from '@/api';
+Vue.prototype.$api = api;
 
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
@@ -26,8 +19,8 @@ library.add(fas);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // ----------------------------------------------------------------
 
-import 'Assets/scss/reset.scss';
-import 'Assets/scss/golbal.scss';
+import '@/assets/scss/reset.scss';
+import '@/assets/scss/golbal.scss';
 
 Vue.config.productionTip = false;
 // TODO: replace vuex
