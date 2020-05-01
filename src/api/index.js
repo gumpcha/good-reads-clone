@@ -11,9 +11,6 @@ export default {
 	signIn(param) {
 		return axios
 			.post('/user/session', {
-				headers: {
-					Authorization: 'Bearer',
-				},
 				email: param.email,
 				password: param.password,
 			})

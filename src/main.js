@@ -1,11 +1,8 @@
 import Vue from 'vue';
-import App from './App.vue';
+import '@/plugins/element.js';
 import router from '@/router';
 import store from '@/store';
-import '@/plugins/element.js';
-
-import api from '@/api';
-Vue.prototype.$api = api;
+import App from '@/App.vue';
 
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5

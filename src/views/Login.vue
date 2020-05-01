@@ -52,7 +52,7 @@
 					:loading="loading"
 					class="signIn-button"
 					type="primary"
-					@click="signIn"
+					@click="dispatchSignIn"
 					block
 				>
 					로그인
@@ -75,7 +75,7 @@
 					:loading="loading"
 					class="signUp-button"
 					type="success"
-					@click="signUp"
+					@click="dispatchSignUp"
 					block
 				>
 					회원가입
@@ -86,6 +86,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
 	name: 'Login',
 	data() {
@@ -156,47 +158,25 @@ export default {
 		};
 	},
 	methods: {
-		async signIn() {
+		...mapActions(['signIn', 'signUp']),
+		dispatchSignIn() {
 			this.loading = true;
-			await this.$api
-				.signIn({
-					email: this.model.email,
-					password: this.model.password,
-				})
-				.then(res => {
-					this.$store.commit('signIn', res);
-					this.$message.success('Login successfull');
-				});
+			this.signIn({
+				email: this.model.email,
+				password: this.model.password,
+			});
 			this.loading = false;
 		},
-		async signUp() {
+		dispatchSignUp() {
 			this.loading = true;
-			await this.$api
-				.singUp({
-					email: this.model.email,
-					password: this.model.password,
-				})
-				.then(res => {
-					console.log(res);
-				});
+			this.signUp({
+				email: this.model.email,
+				password: this.model.password,
+			});
 			this.loading = false;
-			// .catch(err => {
-			// 	console.error(err);
-			// 	this.$notify({
-			// 		title: '주의',
-			// 		dangerouslyUseHTMLString: true,
-			// 		message: `<strong><i>${this.model.email}</i></strong> 등록되지 않은 이메일입니다.`,
-			// 		duration: 3000,
-			// 		customClass: 'notification-danger',
-			// 	});
-			// 	this.activeName = 'signUp';
-			// });
 		},
 		goSignIn() {
 			this.activeName = 'signIn';
-		},
-		test() {
-			console.log(this.model.email);
 		},
 	},
 	computed: {

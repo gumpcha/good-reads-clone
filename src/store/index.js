@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import Api from '@/api';
 
 Vue.use(Vuex);
+
+const message = Vue.prototype.$message;
 
 export default new Vuex.Store({
 	state: {
@@ -18,13 +21,29 @@ export default new Vuex.Store({
 		},
 	},
 	mutations: {
-		// payload 가 { value : 10 } 일 경우
 		signIn(state, payload) {
 			state.user.access_token = payload;
 		},
 	},
 	actions: {
-		// singIn(state) {},
+		async signIn(context, payload) {
+			await Api.signIn({
+				email: payload.email,
+				password: payload.password,
+			}).then(res => {
+				context.commit('signIn', res);
+				message.success('로그인되었습니다.');
+			});
+		},
+		async signUp(context, payload) {
+			await Api.signUp({
+				email: payload.email,
+				password: payload.password,
+			}).then(res => {
+				context.commit('signIn', res);
+				message.success('회원가입이 완료되었습니다.');
+			});
+		},
 	},
 	modules: {},
 });
