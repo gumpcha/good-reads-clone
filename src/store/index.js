@@ -26,7 +26,7 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		async signIn(context, payload) {
+		async dispatchSignIn(context, payload) {
 			await Api.signIn({
 				email: payload.email,
 				password: payload.password,
@@ -35,7 +35,7 @@ export default new Vuex.Store({
 				message.success('로그인되었습니다.');
 			});
 		},
-		async signUp(context, payload) {
+		async dispatchSignUp(context, payload) {
 			await Api.signUp({
 				email: payload.email,
 				password: payload.password,

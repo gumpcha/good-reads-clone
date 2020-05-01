@@ -52,7 +52,7 @@
 					:loading="loading"
 					class="signIn-button"
 					type="primary"
-					@click="dispatchSignIn"
+					@click="signIn"
 					block
 				>
 					로그인
@@ -75,7 +75,7 @@
 					:loading="loading"
 					class="signUp-button"
 					type="success"
-					@click="dispatchSignUp"
+					@click="signUp"
 					block
 				>
 					회원가입
@@ -158,18 +158,18 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions(['signIn', 'signUp']),
-		dispatchSignIn() {
+		...mapActions(['dispatchSignIn', 'dispatchSignUp']),
+		signIn() {
 			this.loading = true;
-			this.signIn({
+			this.dispatchSignIn({
 				email: this.model.email,
 				password: this.model.password,
 			});
 			this.loading = false;
 		},
-		dispatchSignUp() {
+		signUp() {
 			this.loading = true;
-			this.signUp({
+			this.dispatchSignUp({
 				email: this.model.email,
 				password: this.model.password,
 			});

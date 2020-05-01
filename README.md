@@ -38,3 +38,14 @@ Nomad Coders Online Hackerthon 과제
   - 일반 유저와 어드민 유저의 분리, 다른 UI 필요
 - [Firebase 클라우드 메시징](https://firebase.google.com/docs/cloud-messaging)
   - 사이트를 구독중인 유저의 브라우저에 푸시 알림
+
+### 구현
+
+- 📂 api
+  - 서버와의 모든 통신을 관리
+  - axios
+  - rxjs 연결?
+    - 모든 이벤트(서버통신 포함)를 미리 연결하여 구독?
+- 📂 store
+  - 뷰에서의 발생되는 이벤트 관리
+  - api 모듈과 연결
