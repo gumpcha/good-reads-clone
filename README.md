@@ -49,3 +49,5 @@ Nomad Coders Online Hackerthon 과제
 - 📂 store
   - 뷰에서의 발생되는 이벤트 관리
   - api 모듈과 연결
+- rxjs
+  - axios로 통신하여 데이터스트림을 store에 전달(변경, 필터링)

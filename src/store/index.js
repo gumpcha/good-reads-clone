@@ -4,7 +4,7 @@ import Api from '@/api';
 
 Vue.use(Vuex);
 
-const message = Vue.prototype.$message;
+// const message = Vue.prototype.$message;
 
 export default new Vuex.Store({
 	state: {
@@ -21,8 +21,11 @@ export default new Vuex.Store({
 		},
 	},
 	mutations: {
-		signIn(state, payload) {
+		validSignIn(state, payload) {
 			state.user.access_token = payload;
+		},
+		invalidSignIn(state) {
+			state.user.access_token = null;
 		},
 	},
 	actions: {
@@ -30,18 +33,14 @@ export default new Vuex.Store({
 			await Api.signIn({
 				email: payload.email,
 				password: payload.password,
-			}).then(res => {
-				context.commit('signIn', res);
-				message.success('로그인되었습니다.');
+				context: context,
 			});
 		},
 		async dispatchSignUp(context, payload) {
 			await Api.signUp({
 				email: payload.email,
 				password: payload.password,
-			}).then(res => {
-				context.commit('signIn', res);
-				message.success('회원가입이 완료되었습니다.');
+				context: context,
 			});
 		},
 	},

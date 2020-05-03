@@ -62,15 +62,23 @@ const router = new VueRouter({
 	routes,
 });
 
+const message = function(opt) {
+	return Message({
+		showClose: true,
+		dangerouslyUseHTMLString: true,
+		type: opt.type,
+		message: opt.message,
+	});
+};
+
 router.beforeEach((to, from, next) => {
 	if (to.matched.some(record => record.meta.requiresAuth)) {
 		// 이 라우트는 인증이 필요하며 로그인 한 경우 확인하십시오.
 		// 그렇지 않은 경우 로그인 페이지로 리디렉션하십시오.
 		if (!store.getters.loggedIn) {
-			Message({
-				showClose: true,
-				message: 'Available after login.',
+			message({
 				type: 'warning',
+				message: '로그인이 필요합니다.',
 			});
 			next({ name: 'login' });
 		} else {
