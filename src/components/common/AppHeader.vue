@@ -59,7 +59,9 @@
 									@click.native="dropDownMenu"
 								></el-avatar>
 								<el-dropdown-menu slot="dropdown">
-									<el-dropdown-item>Go to profile</el-dropdown-item>
+									<el-dropdown-item>
+										<router-link :to="{ name: 'profile' }">프로필</router-link>
+									</el-dropdown-item>
 									<el-dropdown-item>Go to add book</el-dropdown-item>
 								</el-dropdown-menu>
 							</el-dropdown>

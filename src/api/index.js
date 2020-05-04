@@ -70,11 +70,41 @@ export default {
 				});
 		}).subscribe({
 			next(data) {
-				param.context.commit('signIn', data);
+				param.context.commit('validSignIn', data);
 				message({
 					type: 'success',
 					message: '회원가입이 완료되었습니다.',
 				});
+			},
+			error(err) {
+				console.error(err);
+				param.context.commit('invalidSignIn');
+				message({
+					type: 'error',
+					message:
+						'로그인정보가 일치하지 않습니다.<br>이메일과 비밀번호를 확인해주세요',
+				});
+			},
+		});
+	},
+	getUser(param) {
+		Observable.create(observer => {
+			axios
+				.get('/user', {
+					headers: {
+						Authorization: `Bearer ${param.context.getters.getAccessToken}`,
+					},
+				})
+				.then(res => {
+					observer.next(res.data);
+					observer.complete();
+				})
+				.catch(err => {
+					observer.error(err);
+				});
+		}).subscribe({
+			next(data) {
+				console.log(data);
 			},
 			error(err) {
 				console.error(err);

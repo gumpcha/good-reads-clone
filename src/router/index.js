@@ -35,24 +35,42 @@ const routes = [
 		path: '/profile',
 		name: 'profile',
 		component: () =>
-			import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
+			import(/* webpackChunkName: "profile" */ '@/views/Profile.vue'),
 		meta: { layout: ComplexLayout, requiresAuth: true },
 	},
 	{
 		path: '/addBook',
 		name: 'addBook',
 		component: () =>
-			import(/* webpackChunkName: "addBook" */ '../views/AddBook.vue'),
+			import(/* webpackChunkName: "addBook" */ '@/views/AddBook.vue'),
 		meta: { layout: ComplexLayout, requiresAuth: true },
 	},
 	// -----------------------------------------------
 	// NOTE: From here it is a single component
 	{
 		path: '/login',
-		name: 'login',
+		// name: 'login',
 		component: () =>
-			import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+			import(/* webpackChunkName: "login" */ '@/views/Login.vue'),
 		meta: { layout: SingleLayout },
+		children: [
+			{
+				path: '',
+				name: 'signIn',
+				component: () =>
+					import(
+						/* webpackChunkName: "signIn" */ '@/components/login/SignIn.vue'
+					),
+			},
+			{
+				path: 'signUp',
+				name: 'signUp',
+				component: () =>
+					import(
+						/* webpackChunkName: "signUp" */ '@/components/login/SignUp.vue'
+					),
+			},
+		],
 	},
 ];
 
@@ -80,9 +98,7 @@ router.beforeEach((to, from, next) => {
 				type: 'warning',
 				message: '로그인이 필요합니다.',
 			});
-			next({ name: 'login' });
-		} else {
-			next();
+			next({ name: 'signIn' });
 		}
 	} else {
 		next(); // 반드시 next()를 호출하십시오!

@@ -10,19 +10,21 @@ export default new Vuex.Store({
 	state: {
 		user: {
 			access_token: null,
+			email: null,
 		},
 	},
 	getters: {
 		getAccessToken(state) {
 			return state.user.access_token;
 		},
-		loggedIn: state => {
+		loggedIn(state) {
 			return state.user.access_token ? true : false;
 		},
 	},
 	mutations: {
 		validSignIn(state, payload) {
 			state.user.access_token = payload;
+			state.user.email = payload.email;
 		},
 		invalidSignIn(state) {
 			state.user.access_token = null;
@@ -40,6 +42,11 @@ export default new Vuex.Store({
 			await Api.signUp({
 				email: payload.email,
 				password: payload.password,
+				context: context,
+			});
+		},
+		async getUser(context) {
+			await Api.getUser({
 				context: context,
 			});
 		},
