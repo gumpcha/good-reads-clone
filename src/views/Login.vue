@@ -1,14 +1,10 @@
 <template>
-	<component :is="SignIn"></component>
+	<router-view></router-view>
 </template>
 
 <script>
 export default {
 	name: 'Login',
-	components: {
-		SignIn: () => import('@/components/login/SignIn'),
-		SignUp: () => import('@/components/login/SignUp'),
-	},
 };
 </script>
 

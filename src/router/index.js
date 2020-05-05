@@ -6,11 +6,11 @@ import store from '@/store';
 import SingleLayout from '@/components/layout/SingleLayout';
 import ComplexLayout from '@/components/layout/ComplexLayout';
 import Home from '@/views/Home';
-import NotFound from '@/views/NotFound';
 
 Vue.use(VueRouter);
 
 // -----------------------------------------------
+// NOTE: Url convention hypen
 // Page
 //   Log In(Sign Up)
 //   List
@@ -29,11 +29,13 @@ const routes = [
 	{
 		path: '*',
 		name: 'NotFound',
-		component: NotFound,
+		component: () =>
+			import(/* webpackChunkName: "notFound" */ '@/views/NotFound.vue'),
 		meta: { layout: SingleLayout },
 	},
 	{
 		path: '/',
+		alias: '/home',
 		name: 'home',
 		component: Home,
 		meta: { layout: ComplexLayout },
@@ -46,7 +48,7 @@ const routes = [
 		meta: { layout: ComplexLayout, requiresAuth: true },
 	},
 	{
-		path: '/addBook',
+		path: '/add-book',
 		name: 'addBook',
 		component: () =>
 			import(/* webpackChunkName: "addBook" */ '@/views/AddBook.vue'),
@@ -55,27 +57,27 @@ const routes = [
 	// -----------------------------------------------
 	// NOTE: From here it is a single component
 	{
-		path: '/login',
-		// name: 'login',
+		path: '/',
 		component: () =>
 			import(/* webpackChunkName: "login" */ '@/views/Login.vue'),
-		meta: { layout: SingleLayout },
 		children: [
 			{
-				path: '',
+				path: 'sign-in',
 				name: 'signIn',
 				component: () =>
 					import(
-						/* webpackChunkName: "signIn" */ '@/components/login/SignIn.vue'
+						/* webpackChunkName: "signIn" */ '@/components/login/UserSignIn.vue'
 					),
+				meta: { layout: SingleLayout },
 			},
 			{
-				path: 'signUp',
+				path: 'sign-up',
 				name: 'signUp',
 				component: () =>
 					import(
-						/* webpackChunkName: "signUp" */ '@/components/login/SignUp.vue'
+						/* webpackChunkName: "signUp" */ '@/components/login/UserSignUp.vue'
 					),
+				meta: { layout: SingleLayout },
 			},
 		],
 	},

@@ -1,6 +1,12 @@
 <template>
 	<el-card>
 		<el-form class="login-form" :model="model" :rules="rules" ref="form">
+			<!-- 이메일 입력단계가 아닌 비밀번호 입력단계로 넘어갔을 떄만 작동 -->
+			<el-page-header
+				:content="'회원가입'"
+				style="margin-bottom: 10px; font-size: 16px;"
+				@back="goBack"
+			></el-page-header>
 			<el-form-item prop="email">
 				<el-input
 					v-model="model.email"
@@ -31,20 +37,15 @@
 					></el-button>
 				</el-input>
 			</el-form-item>
-			<el-form-item class="mt-3" v-if="activeName === 'signIn'">
+			<el-form-item>
 				<el-button
 					:disabled="disabledButton"
 					:loading="loading"
-					class="signIn-button"
-					type="primary"
-					@click="signIn"
+					class="signUp-button"
+					type="success"
+					@click="signUp"
 					block
 				>
-					로그인
-				</el-button>
-			</el-form-item>
-			<el-form-item>
-				<el-button class="signUp-button" type="success" block>
 					회원가입
 				</el-button>
 			</el-form-item>
@@ -56,7 +57,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-	name: 'SignIn',
+	name: 'UserSignUp',
 	data() {
 		let emailValidate = (rule, value, callback) => {
 			const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -124,19 +125,18 @@ export default {
 			},
 		};
 	},
-	mounted() {},
 	methods: {
-		...mapActions(['dispatchSignIn']),
-		signIn() {
+		...mapActions(['dispatchSignUp']),
+		signUp() {
 			this.loading = true;
-			this.dispatchSignIn({
+			this.dispatchSignUp({
 				email: this.model.email,
 				password: this.model.password,
 			});
 			this.loading = false;
 		},
-		goSignIn() {
-			this.activeName = 'signIn';
+		goBack() {
+			this.$router.push({ name: 'signIn' });
 		},
 	},
 	computed: {
