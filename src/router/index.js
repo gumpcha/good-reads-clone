@@ -5,7 +5,8 @@ import { Message } from 'element-ui';
 import store from '@/store';
 import SingleLayout from '@/components/layout/SingleLayout';
 import ComplexLayout from '@/components/layout/ComplexLayout';
-import Home from '@/views/Home.vue';
+import Home from '@/views/Home';
+import NotFound from '@/views/NotFound';
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,12 @@ Vue.use(VueRouter);
 // -----------------------------------------------
 
 const routes = [
+	{
+		path: '*',
+		name: 'NotFound',
+		component: NotFound,
+		meta: { layout: SingleLayout },
+	},
 	{
 		path: '/',
 		name: 'home',
