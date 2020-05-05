@@ -1,9 +1,10 @@
 <template>
-	<el-card>
+	<el-card shadow="hover">
 		<el-form class="login-form" :model="model" :rules="rules" ref="form">
 			<!-- 이메일 입력단계가 아닌 비밀번호 입력단계로 넘어갔을 떄만 작동 -->
 			<el-page-header
 				:content="'회원가입'"
+				:title="'로그인'"
 				style="margin-bottom: 10px; font-size: 16px;"
 				@back="goBack"
 			></el-page-header>

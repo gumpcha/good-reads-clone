@@ -40,11 +40,9 @@ export default {
 	padding-top: 0;
 	padding-bottom: 30px;
 }
-h2 {
-	font-family: 'Open Sans';
-	letter-spacing: 1px;
-	font-family: Roboto, sans-serif;
-	padding-bottom: 20px;
+.card-title {
+	margin-bottom: 10px;
+	font-size: 18px;
 }
 .login .el-card {
 	width: 340px;

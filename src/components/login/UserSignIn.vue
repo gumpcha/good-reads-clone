@@ -1,6 +1,6 @@
 <template>
-	<el-card>
-		<h2>로그인</h2>
+	<el-card shadow="hover">
+		<p class="card-title">로그인</p>
 		<el-form class="login-form" :model="model" :rules="rules" ref="form">
 			<el-form-item prop="email">
 				<el-input
@@ -32,7 +32,7 @@
 					></el-button>
 				</el-input>
 			</el-form-item>
-			<el-form-item class="mt-3">
+			<el-form-item>
 				<el-button
 					:disabled="disabledButton"
 					:loading="loading"
