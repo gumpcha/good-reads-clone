@@ -50,19 +50,25 @@
 							:xl="6"
 							class="avatar-wrapper"
 						>
-							<el-dropdown v-if="loggedIn" trigger="click">
+							<el-dropdown
+								v-if="loggedIn"
+								trigger="click"
+								@command="handleCommand"
+							>
 								<el-avatar
 									class="avatar"
 									:size="avatar.size"
 									:src="avatar.src"
 									:icon="avatar.src ? null : 'el-icon-user-solid'"
-									@click.native="dropDownMenu"
 								></el-avatar>
-								<el-dropdown-menu slot="dropdown">
-									<el-dropdown-item>
-										<router-link :to="{ name: 'profile' }">프로필</router-link>
+								<el-dropdown-menu slot="dropdown" size="mini" split-button>
+									<el-dropdown-item
+										v-for="(menu, index) in dropdownMenu"
+										:key="index"
+										:command="menu.command"
+									>
+										{{ menu.name }}
 									</el-dropdown-item>
-									<el-dropdown-item>Go to add book</el-dropdown-item>
 								</el-dropdown-menu>
 							</el-dropdown>
 							<el-avatar
@@ -96,6 +102,16 @@ export default {
 				size: 'large',
 				src: null,
 			},
+			dropdownMenu: [
+				{
+					command: 'profile',
+					name: '프로필',
+				},
+				{
+					command: 'addBook',
+					name: '책 추가',
+				},
+			],
 		};
 	},
 	methods: {
@@ -176,10 +192,11 @@ export default {
 			this.$bus.$emit('toggle', true);
 		},
 		goToLogin() {
-			console.log('trest');
+			this.$router.push({ name: 'signIn' });
 		},
-		dropDownMenu() {
-			console.log('dropDownMenu');
+		handleCommand(command) {
+			console.log(command);
+			this.$router.push({ name: command });
 		},
 	},
 	computed: {

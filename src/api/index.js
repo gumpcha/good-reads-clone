@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 // baseURL 기본값을 정의한다
 axios.defaults.baseURL = 'https://good-reads-clone-api-express.herokuapp.com';
 // 모든 요청에 추가할 헤더 설정
-axios.defaults.headers.common['Authorization'] = 'Bearer';
+// axios.defaults.headers.common['Authorization'] = 'Bearer';
 // GET 요청에 추가할 헤더 설정
 axios.defaults.headers.get['Accepts'] = 'application/json';
 
@@ -36,6 +36,7 @@ export default {
 				});
 		}).subscribe({
 			next(data) {
+				localStorage.setItem('access_token', data.access_token);
 				param.context.commit('validSignIn', data);
 				message({
 					type: 'success',
