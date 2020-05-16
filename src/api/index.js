@@ -21,6 +21,7 @@ const message = function(opt) {
 
 export default {
 	signIn(param) {
+		param.context.commit('authRequest');
 		Observable.create(observer => {
 			axios
 				.post('/user/session', {
@@ -28,7 +29,7 @@ export default {
 					password: param.password,
 				})
 				.then(res => {
-					observer.next(res.data.access_token);
+					observer.next(res.data);
 					observer.complete();
 				})
 				.catch(err => {
@@ -36,8 +37,12 @@ export default {
 				});
 		}).subscribe({
 			next(data) {
-				localStorage.setItem('access_token', data.access_token);
-				param.context.commit('validSignIn', data);
+				const user = {
+					email: data.email,
+				};
+				localStorage.setItem('accessToken', data.access_token);
+				localStorage.setItem('user', JSON.stringify(user));
+				param.context.commit('authSuccess', data);
 				message({
 					type: 'success',
 					message: '로그인되었습니다',
@@ -46,7 +51,7 @@ export default {
 			},
 			error(err) {
 				console.error(err);
-				param.context.commit('invalidSignIn');
+				param.context.commit('authError');
 				message({
 					type: 'error',
 					message:
@@ -56,6 +61,7 @@ export default {
 		});
 	},
 	signUp(param) {
+		param.context.commit('authRequest');
 		Observable.create(observer => {
 			axios
 				.post('/user', {
@@ -71,25 +77,64 @@ export default {
 				});
 		}).subscribe({
 			next(data) {
-				param.context.commit('validSignIn', data);
+				const user = {
+					email: data.email,
+				};
+				localStorage.setItem('accessToken', data.access_token);
+				localStorage.setItem('user', JSON.stringify(user));
+				param.context.commit('authSuccess', data);
 				message({
 					type: 'success',
 					message: '회원가입이 완료되었습니다.',
 				});
-				router.push({ name: 'signIn' });
+				router.push({ name: 'home' });
 			},
 			error(err) {
 				console.error(err);
-				param.context.commit('invalidSignIn');
+				param.context.commit('authError');
 				message({
 					type: 'error',
 					message:
-						'로그인정보가 일치하지 않습니다.<br>이메일과 비밀번호를 확인해주세요',
+						'회원가입 정보가 유효하지 않습니다.<br>이메일과 비밀번호를 확인해주세요',
+				});
+			},
+		});
+	},
+	logout(param) {
+		Observable.create(observer => {
+			axios
+				.delete('/user/session', {
+					headers: {
+						Authorization: `Bearer ${param.context.getters.getAccessToken}`,
+					},
+				})
+				.then(() => {
+					observer.next();
+					observer.complete();
+				})
+				.catch(err => {
+					observer.error(err);
+				});
+		}).subscribe({
+			next() {
+				param.context.commit('logout');
+				message({
+					type: 'success',
+					message: '로그아웃 되었습니다.',
+				});
+			},
+			error(err) {
+				console.error(err);
+				param.context.commit('authError');
+				message({
+					type: 'error',
+					message: '서버오류로 인해 로그아웃이 되지 않았습니다.',
 				});
 			},
 		});
 	},
 	getUser(param) {
+		param.context.commit('authRequest');
 		Observable.create(observer => {
 			axios
 				.get('/user', {
@@ -107,10 +152,11 @@ export default {
 		}).subscribe({
 			next(data) {
 				console.log(data);
+				param.context.commit('authSuccess', data);
 			},
 			error(err) {
 				console.error(err);
-				param.context.commit('invalidSignIn');
+				param.context.commit('authError');
 				message({
 					type: 'error',
 					message:

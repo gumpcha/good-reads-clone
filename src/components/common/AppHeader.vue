@@ -51,7 +51,7 @@
 							class="avatar-wrapper"
 						>
 							<el-dropdown
-								v-if="loggedIn"
+								v-if="isLoggedIn"
 								trigger="click"
 								@command="handleCommand"
 							>
@@ -71,7 +71,23 @@
 									</el-dropdown-item>
 								</el-dropdown-menu>
 							</el-dropdown>
-							<el-avatar
+							<el-tooltip
+								v-else
+								class="item"
+								effect="dark"
+								content="로그인"
+								placement="bottom-end"
+							>
+								<el-avatar
+									style="background-color: red;"
+									class="avatar"
+									:size="avatar.size"
+									@click.native="goToLogin"
+								>
+									<font-awesome-icon icon="sign-in-alt" />
+								</el-avatar>
+							</el-tooltip>
+							<!-- <el-avatar
 								v-else
 								style="background-color: red;"
 								class="avatar"
@@ -79,7 +95,7 @@
 								@click.native="goToLogin"
 							>
 								<font-awesome-icon icon="sign-in-alt" />
-							</el-avatar>
+							</el-avatar> -->
 						</el-col>
 					</el-row>
 				</el-row>
@@ -90,6 +106,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
 	name: 'AppHeader',
@@ -111,10 +128,15 @@ export default {
 					command: 'addBook',
 					name: '책 추가',
 				},
+				{
+					command: 'logout',
+					name: '로그아웃',
+				},
 			],
 		};
 	},
 	methods: {
+		...mapActions(['dispatchLogout']),
 		createFilter(queryString) {
 			return link => {
 				return link.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
@@ -196,12 +218,16 @@ export default {
 		},
 		handleCommand(command) {
 			console.log(command);
-			this.$router.push({ name: command });
+			if (command === 'logout') {
+				this.dispatchLogout();
+			} else {
+				this.$router.push({ name: command });
+			}
 		},
 	},
 	computed: {
 		// getter를 객체 전개 연산자(Object Spread Operator)로 계산하여 추가합니다.
-		...mapGetters(['loggedIn']),
+		...mapGetters(['isLoggedIn']),
 	},
 	mounted() {
 		this.links = this.loadAll();

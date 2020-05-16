@@ -102,10 +102,9 @@ router.beforeEach((to, from, next) => {
 	if (to.matched.some(record => record.meta.requiresAuth)) {
 		// 이 라우트는 인증이 필요하며 로그인 한 경우 확인하십시오.
 		// 그렇지 않은 경우 로그인 페이지로 리디렉션하십시오.
-		const { access_token } = localStorage;
-		console.log(access_token);
+		console.log(store.getters.getAccessToken);
 
-		if (!store.getters.loggedIn) {
+		if (!store.getters.isLoggedIn) {
 			message({
 				type: 'warning',
 				message: '로그인이 필요합니다.',

@@ -4,30 +4,45 @@ import Api from '@/api';
 
 Vue.use(Vuex);
 
-// const message = Vue.prototype.$message;
-
 export default new Vuex.Store({
 	state: {
-		user: {
-			access_token: null,
+		authStatus: null,
+		accessToken: localStorage.getItem('accessToken') || null,
+		user: JSON.parse(localStorage.getItem('user')) || {
 			email: null,
 		},
 	},
 	getters: {
 		getAccessToken(state) {
-			return state.user.access_token;
+			return state.accessToken;
 		},
-		loggedIn(state) {
-			return state.user.access_token ? true : false;
+		getAuthStatus(state) {
+			return state.authStatus;
+		},
+		isLoggedIn(state) {
+			return state.accessToken ? true : false;
 		},
 	},
 	mutations: {
-		validSignIn(state, payload) {
-			state.user.access_token = payload;
+		authRequest(state) {
+			state.status = 'loading';
+		},
+		authSuccess(state, payload) {
+			state.authStatus = 'success';
+			state.accessToken = payload.access_token;
 			state.user.email = payload.email;
 		},
-		invalidSignIn(state) {
-			state.user.access_token = null;
+		authError(state) {
+			state.authStatus = 'error';
+			state.accessToken = null;
+			state.user.email = null;
+		},
+		logout(state) {
+			localStorage.removeItem('accessToken');
+			localStorage.removeItem('user');
+			state.authStatus = null;
+			state.accessToken = null;
+			state.user.email = null;
 		},
 	},
 	actions: {
@@ -42,6 +57,11 @@ export default new Vuex.Store({
 			await Api.signUp({
 				email: payload.email,
 				password: payload.password,
+				context: context,
+			});
+		},
+		async dispatchLogout(context) {
+			await Api.logout({
 				context: context,
 			});
 		},
