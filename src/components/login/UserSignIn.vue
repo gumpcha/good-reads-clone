@@ -55,6 +55,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { messageService } from '@/message';
 
 export default {
 	name: 'UserSignIn',
@@ -126,12 +127,29 @@ export default {
 	},
 	methods: {
 		...mapActions(['dispatchSignIn']),
-		signIn() {
+		async signIn() {
 			this.loading = true;
-			this.dispatchSignIn({
-				email: this.model.email,
-				password: this.model.password,
-			});
+			await this.$api
+				.signIn({
+					email: this.model.email,
+					password: this.model.password,
+				})
+				.then(res => {
+					const user = {
+						email: res.email,
+					};
+					this.commit('authRequest');
+					localStorage.setItem('accessToken', res.access_token);
+					localStorage.setItem('user', JSON.stringify(user));
+					messageService.sendMessage({
+						type: 'success',
+						message: '로그인되었습니다',
+					});
+					this.$router.push({ name: 'home' });
+				})
+				.catch(err => {
+					console.error(err);
+				});
 			this.loading = false;
 		},
 		goSignUp() {

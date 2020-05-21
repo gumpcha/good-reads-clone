@@ -46,13 +46,13 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		async dispatchSignIn(context, payload) {
-			await Api.signIn({
-				email: payload.email,
-				password: payload.password,
-				context: context,
-			});
-		},
+		// dispatchSignIn(context, payload) {
+		// 	return Api.signIn({
+		// 		email: payload.email,
+		// 		password: payload.password,
+		// 		context: context,
+		// 	});
+		// },
 		async dispatchSignUp(context, payload) {
 			await Api.signUp({
 				email: payload.email,

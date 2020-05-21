@@ -21,34 +21,14 @@ const message = function(opt) {
 
 export default {
 	signIn(param) {
-		param.context.commit('authRequest');
-		axios
+		// param.context.commit('authRequest');
+		return axios
 			.post('/user/session', {
 				email: param.email,
 				password: param.password,
 			})
-			.then(res => {
-				const user = {
-					email: res.data.email,
-				};
-				localStorage.setItem('accessToken', res.data.access_token);
-				localStorage.setItem('user', JSON.stringify(user));
-				param.context.commit('authSuccess', res.data);
-				message({
-					type: 'success',
-					message: '로그인되었습니다',
-				});
-				router.push({ name: 'home' });
-			})
-			.catch(err => {
-				console.error(err);
-				param.context.commit('authError');
-				message({
-					type: 'error',
-					message:
-						'로그인정보가 일치하지 않습니다.<br>이메일과 비밀번호를 확인해주세요',
-				});
-			});
+			.then(res => res.data)
+			.catch(err => err);
 	},
 	signUp(param) {
 		param.context.commit('authRequest');
