@@ -25,7 +25,7 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		authRequest(state) {
-			state.status = 'loading';
+			state.authStatus = 'loading';
 		},
 		authSuccess(state, payload) {
 			state.authStatus = 'success';
