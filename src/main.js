@@ -17,6 +17,12 @@ library.add(fas);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 // ----------------------------------------------------------------
 
+// ----------------------------------------------------------------
+// NOTE: plugin
+import customPlugin from '@/plugins/custom.js';
+Vue.use(customPlugin);
+// ----------------------------------------------------------------
+
 import '@/assets/scss/reset.scss';
 import '@/assets/scss/golbal.scss';
 

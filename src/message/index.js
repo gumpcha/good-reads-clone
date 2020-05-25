@@ -6,5 +6,5 @@ export const messageService = {
 	sendMessage: param =>
 		subject.next({ type: param.type, message: param.message }),
 	clearMessages: () => subject.next(),
-	getMessage: () => subject.asObservable(),
+	receiveMessage: () => subject.asObservable(),
 };

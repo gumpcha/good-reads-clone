@@ -1,7 +1,5 @@
 import axios from 'axios';
-import router from '@/router';
 import { Message } from 'element-ui';
-// import { Observable } from 'rxjs';
 
 // baseURL 기본값을 정의한다
 axios.defaults.baseURL = 'https://good-reads-clone-api-express.herokuapp.com';
@@ -21,7 +19,6 @@ const message = function(opt) {
 
 export default {
 	signIn(param) {
-		// param.context.commit('authRequest');
 		return axios
 			.post('/user/session', {
 				email: param.email,
@@ -31,57 +28,23 @@ export default {
 			.catch(err => err);
 	},
 	signUp(param) {
-		param.context.commit('authRequest');
-		axios
+		return axios
 			.post('/user', {
 				email: param.email,
 				password: param.password,
 			})
-			.then(res => {
-				const user = {
-					email: res.data.email,
-				};
-				localStorage.setItem('accessToken', res.data.access_token);
-				localStorage.setItem('user', JSON.stringify(user));
-				param.context.commit('authSuccess', res.data);
-				message({
-					type: 'success',
-					message: '회원가입이 완료되었습니다.',
-				});
-				router.push({ name: 'home' });
-			})
-			.catch(err => {
-				console.error(err);
-				param.context.commit('authError');
-				message({
-					type: 'error',
-					message:
-						'회원가입 정보가 유효하지 않습니다.<br>이메일과 비밀번호를 확인해주세요',
-				});
-			});
+			.then(res => res.data)
+			.catch(err => err);
 	},
 	logout(param) {
-		axios
+		return axios
 			.delete('/user/session', {
 				headers: {
-					Authorization: `Bearer ${param.context.getters.getAccessToken}`,
+					Authorization: `Bearer ${param.access_token}`,
 				},
 			})
-			.then(() => {
-				param.context.commit('logout');
-				message({
-					type: 'success',
-					message: '로그아웃 되었습니다.',
-				});
-			})
-			.catch(err => {
-				console.error(err);
-				param.context.commit('authError');
-				message({
-					type: 'error',
-					message: '서버오류로 인해 로그아웃이 되지 않았습니다.',
-				});
-			});
+			.then(() => {})
+			.catch(err => err);
 	},
 	getUser(param) {
 		param.context.commit('authRequest');

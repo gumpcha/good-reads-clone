@@ -53,18 +53,18 @@ export default new Vuex.Store({
 		// 		context: context,
 		// 	});
 		// },
-		async dispatchSignUp(context, payload) {
-			await Api.signUp({
-				email: payload.email,
-				password: payload.password,
-				context: context,
-			});
-		},
-		async dispatchLogout(context) {
-			await Api.logout({
-				context: context,
-			});
-		},
+		// async dispatchSignUp(context, payload) {
+		// 	await Api.signUp({
+		// 		email: payload.email,
+		// 		password: payload.password,
+		// 		context: context,
+		// 	});
+		// },
+		// async dispatchLogout(context) {
+		// 	await Api.logout({
+		// 		context: context,
+		// 	});
+		// },
 		async getUser(context) {
 			await Api.getUser({
 				context: context,

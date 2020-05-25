@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: 'UserSignUp',
@@ -127,13 +127,40 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions(['dispatchSignUp']),
-		signUp() {
+		...mapMutations(['authRequest', 'authSuccess', 'authError']),
+		async signUp() {
+			this.authRequest;
 			this.loading = true;
-			this.dispatchSignUp({
-				email: this.model.email,
-				password: this.model.password,
-			});
+			await this.$api
+				.signUp({
+					email: this.model.email,
+					password: this.model.password,
+				})
+				.then(res => {
+					const user = {
+						email: res.email,
+					};
+					this.authSuccess({
+						access_token: res.access_token,
+						email: res.email,
+					});
+					localStorage.setItem('accessToken', res.access_token);
+					localStorage.setItem('user', JSON.stringify(user));
+					this.sendMessage({
+						type: 'success',
+						message: '회원가입이 완료되었습니다.',
+					});
+					this.$router.push({ name: 'home' });
+				})
+				.catch(err => {
+					console.error(err);
+					this.authError();
+					this.sendMessage({
+						type: 'error',
+						message:
+							'회원가입 정보가 유효하지 않습니다.<br>이메일과 비밀번호를 확인해주세요',
+					});
+				});
 			this.loading = false;
 		},
 		goBack() {

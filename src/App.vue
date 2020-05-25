@@ -10,15 +10,6 @@ import SingleLayout from '@/components/layout/SingleLayout';
 import { Message } from 'element-ui';
 import { messageService } from '@/message';
 
-// const message = function(opt) {
-// 	return Message({
-// 		showClose: true,
-// 		dangerouslyUseHTMLString: true,
-// 		type: opt.type,
-// 		message: opt.message,
-// 	});
-// };
-
 export default {
 	name: 'App',
 	components: {
@@ -33,16 +24,14 @@ export default {
 	},
 	created() {
 		// subscribe to home component messages
-		this.subscription = messageService.getMessage().subscribe(message => {
-			console.log(message);
-
+		this.subscription = messageService.receiveMessage().subscribe(message => {
 			if (message) {
 				// add message to local state if not empty
 				// this.messages.push(message);
 				this.setMessage(message);
 			} else {
 				// clear messages when empty message received
-				this.messages = [];
+				// this.messages = [];
 			}
 		});
 	},
@@ -51,16 +40,6 @@ export default {
 		this.subscription.unsubscribe();
 	},
 	methods: {
-		sendMessage() {
-			// send message to subscribers via observable subject
-			messageService.sendMessage(
-				'Message from Home Page Component to App Component!',
-			);
-		},
-		clearMessages() {
-			// clear messages
-			messageService.clearMessages();
-		},
 		setMessage(param) {
 			this.$message({
 				showClose: true,
@@ -83,7 +62,6 @@ export default {
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	// text-align: center;
 	color: #2c3e50;
 }
 </style>

@@ -54,8 +54,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import { messageService } from '@/message';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: 'UserSignIn',
@@ -126,8 +125,9 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions(['dispatchSignIn']),
+		...mapMutations(['authRequest', 'authSuccess', 'authError']),
 		async signIn() {
+			this.authRequest();
 			this.loading = true;
 			await this.$api
 				.signIn({
@@ -138,10 +138,13 @@ export default {
 					const user = {
 						email: res.email,
 					};
-					this.commit('authRequest');
+					this.authSuccess({
+						access_token: res.access_token,
+						email: res.email,
+					});
 					localStorage.setItem('accessToken', res.access_token);
 					localStorage.setItem('user', JSON.stringify(user));
-					messageService.sendMessage({
+					this.sendMessage({
 						type: 'success',
 						message: '로그인되었습니다',
 					});
@@ -149,6 +152,12 @@ export default {
 				})
 				.catch(err => {
 					console.error(err);
+					this.authError();
+					this.sendMessage({
+						type: 'error',
+						message:
+							'로그인정보가 일치하지 않습니다.<br>이메일과 비밀번호를 확인해주세요',
+					});
 				});
 			this.loading = false;
 		},

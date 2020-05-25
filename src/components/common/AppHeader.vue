@@ -106,7 +106,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { mapActions } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: 'AppHeader',
@@ -136,7 +136,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions(['dispatchLogout']),
+		...mapMutations(['authRequest', 'authSuccess', 'authError', 'logout']),
 		createFilter(queryString) {
 			return link => {
 				return link.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
@@ -217,9 +217,26 @@ export default {
 			this.$router.push({ name: 'signIn' });
 		},
 		handleCommand(command) {
-			console.log(command);
 			if (command === 'logout') {
-				this.dispatchLogout();
+				this.$api
+					.logout({
+						access_token: this.getAccessToken,
+					})
+					.then(() => {
+						this.logout();
+						this.sendMessage({
+							type: 'success',
+							message: '로그아웃 되었습니다.',
+						});
+					})
+					.catch(err => {
+						console.error(err);
+						this.authError();
+						this.sendMessage({
+							type: 'error',
+							message: '서버오류로 인해 로그아웃이 되지 않았습니다.',
+						});
+					});
 			} else {
 				this.$router.push({ name: command });
 			}
@@ -227,7 +244,7 @@ export default {
 	},
 	computed: {
 		// getter를 객체 전개 연산자(Object Spread Operator)로 계산하여 추가합니다.
-		...mapGetters(['isLoggedIn']),
+		...mapGetters(['isLoggedIn', 'getAccessToken']),
 	},
 	mounted() {
 		this.links = this.loadAll();
