@@ -1,6 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 module.exports = {
 	configureWebpack: {
@@ -10,17 +8,14 @@ module.exports = {
 			},
 		},
 		devtool: 'source-map',
-		plugins: [
-			new HtmlWebpackPlugin(),
-			new PreloadWebpackPlugin({
-				rel: 'preload',
-				as(entry) {
-					if (/\.css$/.test(entry)) return 'style';
-					if (/\.woff$/.test(entry)) return 'font';
-					if (/\.png$/.test(entry)) return 'image';
-					return 'script';
-				},
-			}),
-		],
+		performance: {
+			hints: false,
+		},
+		optimization: {
+			splitChunks: {
+				minSize: 10000,
+				maxSize: 250000,
+			},
+		},
 	},
 };
