@@ -28,7 +28,8 @@ module.exports = {
 				htmlWhitespaceSensitivity: 'ignore',
 			},
 		],
-		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+		// 'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+		'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
 	},
 
 	overrides: [
