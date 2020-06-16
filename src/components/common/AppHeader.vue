@@ -84,7 +84,8 @@
 									:size="avatar.size"
 									@click.native="goToLogin"
 								>
-									<font-awesome-icon icon="sign-in-alt" />
+									<i class="fas fa-sign-in-alt"></i>
+									<!-- <font-awesome-icon icon="sign-in-alt" /> -->
 								</el-avatar>
 							</el-tooltip>
 							<!-- <el-avatar
@@ -107,6 +108,15 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mapMutations } from 'vuex';
+
+// ----------------------------------------------------------------
+// NOTE: work for font awesome5
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { dom } from '@fortawesome/fontawesome-svg-core'; // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+library.add(faSignInAlt);
+// ----------------------------------------------------------------
 
 export default {
 	name: 'AppHeader',

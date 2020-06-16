@@ -57,6 +57,15 @@
 <script>
 import { mapMutations } from 'vuex';
 
+// ----------------------------------------------------------------
+// NOTE: work for font awesome5
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEnvelopeSquare, faLock } from '@fortawesome/free-solid-svg-icons';
+import { dom } from '@fortawesome/fontawesome-svg-core'; // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+library.add(faEnvelopeSquare, faLock);
+// ----------------------------------------------------------------
+
 export default {
 	name: 'UserSignUp',
 	data() {

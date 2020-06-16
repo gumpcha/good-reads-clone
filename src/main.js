@@ -6,24 +6,6 @@ import App from '@/App.vue';
 import Api from '@/api';
 
 // ----------------------------------------------------------------
-// NOTE: work for font awesome5
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-	faHome,
-	faUser,
-	faBook,
-	faEnvelopeSquare,
-	faLock,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { dom } from '@fortawesome/fontawesome-svg-core'; // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-library.add(faHome, faUser, faBook, faEnvelopeSquare, faLock);
-
-Vue.component('font-awesome-icon', FontAwesomeIcon);
-// ----------------------------------------------------------------
-
-// ----------------------------------------------------------------
 // NOTE: plugin
 import customPlugin from '@/plugins/custom.js';
 Vue.use(customPlugin);
