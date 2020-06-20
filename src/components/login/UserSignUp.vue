@@ -66,8 +66,34 @@ dom.watch(); // This will kick of the initial replacement of i to svg tags and c
 library.add(faEnvelopeSquare, faLock);
 // ----------------------------------------------------------------
 
+// ----------------------------------------------------------------
+// NOTE: work for element ui
+import 'element-ui/lib/theme-chalk/card.css';
+import 'element-ui/lib/theme-chalk/page-header.css';
+import 'element-ui/lib/theme-chalk/form.css';
+import 'element-ui/lib/theme-chalk/form-item.css';
+import 'element-ui/lib/theme-chalk/input.css';
+import 'element-ui/lib/theme-chalk/button.css';
+// ----------------------------------------------------------------
+
 export default {
 	name: 'UserSignUp',
+	components: {
+		'el-card': () =>
+			import(/* webpackChunkName: "el-card" */ 'element-ui/lib/card'),
+		'el-form': () =>
+			import(/* webpackChunkName: "el-form" */ 'element-ui/lib/form'),
+		'el-page-header': () =>
+			import(
+				/* webpackChunkName: "el-page-header" */ 'element-ui/lib/page-header'
+			),
+		'el-form-item': () =>
+			import(/* webpackChunkName: "el-form-item" */ 'element-ui/lib/form-item'),
+		'el-input': () =>
+			import(/* webpackChunkName: "el-input" */ 'element-ui/lib/input'),
+		'el-button': () =>
+			import(/* webpackChunkName: "el-button" */ 'element-ui/lib/button'),
+	},
 	data() {
 		let emailValidate = (rule, value, callback) => {
 			const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

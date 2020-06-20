@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import '@/plugins/element.js';
+// import '@/plugins/element.js';
 import router from '@/router';
 import store from '@/store';
 import App from '@/App.vue';

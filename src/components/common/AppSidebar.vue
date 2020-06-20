@@ -44,8 +44,23 @@ dom.watch(); // This will kick of the initial replacement of i to svg tags and c
 library.add(faHome, faUser, faBook);
 // ----------------------------------------------------------------
 
+// ----------------------------------------------------------------
+// NOTE: work for element ui
+import 'element-ui/lib/theme-chalk/drawer.css';
+import 'element-ui/lib/theme-chalk/menu.css';
+import 'element-ui/lib/theme-chalk/menu-item.css';
+// ----------------------------------------------------------------
+
 export default {
 	name: 'AppSidebar',
+	components: {
+		'el-drawer': () =>
+			import(/* webpackChunkName: "el-drawer" */ 'element-ui/lib/drawer'),
+		'el-menu': () =>
+			import(/* webpackChunkName: "el-menu" */ 'element-ui/lib/menu'),
+		'el-menu-item': () =>
+			import(/* webpackChunkName: "el-menu-item" */ 'element-ui/lib/menu-item'),
+	},
 	data() {
 		return {
 			drawer: false,

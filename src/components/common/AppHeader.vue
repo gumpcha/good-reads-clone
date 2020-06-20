@@ -85,18 +85,8 @@
 									@click.native="goToLogin"
 								>
 									<i class="fas fa-sign-in-alt"></i>
-									<!-- <font-awesome-icon icon="sign-in-alt" /> -->
 								</el-avatar>
 							</el-tooltip>
-							<!-- <el-avatar
-								v-else
-								style="background-color: red;"
-								class="avatar"
-								:size="avatar.size"
-								@click.native="goToLogin"
-							>
-								<font-awesome-icon icon="sign-in-alt" />
-							</el-avatar> -->
 						</el-col>
 					</el-row>
 				</el-row>
@@ -118,9 +108,40 @@ dom.watch(); // This will kick of the initial replacement of i to svg tags and c
 library.add(faSignInAlt);
 // ----------------------------------------------------------------
 
+// ----------------------------------------------------------------
+// NOTE: work for element ui
+import 'element-ui/lib/theme-chalk/container.css';
+import 'element-ui/lib/theme-chalk/row.css';
+import 'element-ui/lib/theme-chalk/col.css';
+import 'element-ui/lib/theme-chalk/header.css';
+import 'element-ui/lib/theme-chalk/button.css';
+import 'element-ui/lib/theme-chalk/autocomplete.css';
+import 'element-ui/lib/theme-chalk/tooltip.css';
+import 'element-ui/lib/theme-chalk/avatar.css';
+// ----------------------------------------------------------------
+
 export default {
 	name: 'AppHeader',
-	component: {},
+	components: {
+		'el-container': () =>
+			import(/* webpackChunkName: "el-container" */ 'element-ui/lib/container'),
+		'el-row': () =>
+			import(/* webpackChunkName: "el-row" */ 'element-ui/lib/row'),
+		'el-col': () =>
+			import(/* webpackChunkName: "el-col" */ 'element-ui/lib/col'),
+		'el-header': () =>
+			import(/* webpackChunkName: "el-header" */ 'element-ui/lib/header'),
+		'el-button': () =>
+			import(/* webpackChunkName: "el-button" */ 'element-ui/lib/button'),
+		'el-autocomplete': () =>
+			import(
+				/* webpackChunkName: "el-autocomplete" */ 'element-ui/lib/autocomplete'
+			),
+		'el-tooltip': () =>
+			import(/* webpackChunkName: "el-tooltip" */ 'element-ui/lib/tooltip'),
+		'el-avatar': () =>
+			import(/* webpackChunkName: "el-avatar" */ 'element-ui/lib/avatar'),
+	},
 	data() {
 		return {
 			links: [],
