@@ -1,7 +1,8 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-	.BundleAnalyzerPlugin;
+// TODO: remove
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+// 	.BundleAnalyzerPlugin;
 
 module.exports = {
 	configureWebpack: {
@@ -24,9 +25,10 @@ module.exports = {
 		},
 		plugins: [
 			new CleanWebpackPlugin(),
-			new BundleAnalyzerPlugin({
-				analyzerMode: 'static',
-			}),
+			// TODO: remove
+			// new BundleAnalyzerPlugin({
+			// 	analyzerMode: 'static',
+			// }),
 		],
 	},
 };

@@ -12,11 +12,18 @@
 import AppHeader from '@/components/common/AppHeader';
 import AppSidebar from '@/components/common/AppSidebar';
 
+// ----------------------------------------------------------------
+// NOTE: work for element ui
+import 'element-ui/lib/theme-chalk/main.css';
+// ----------------------------------------------------------------
+
 export default {
 	name: 'ComplexLayout',
 	components: {
 		AppHeader,
 		AppSidebar,
+		'el-main': () =>
+			import(/* webpackChunkName: "el-main" */ 'element-ui/lib/main'),
 	},
 	methods: {},
 };

@@ -118,6 +118,7 @@ import 'element-ui/lib/theme-chalk/button.css';
 import 'element-ui/lib/theme-chalk/autocomplete.css';
 import 'element-ui/lib/theme-chalk/tooltip.css';
 import 'element-ui/lib/theme-chalk/avatar.css';
+import 'element-ui/lib/theme-chalk/image.css';
 // ----------------------------------------------------------------
 
 export default {
@@ -141,6 +142,8 @@ export default {
 			import(/* webpackChunkName: "el-tooltip" */ 'element-ui/lib/tooltip'),
 		'el-avatar': () =>
 			import(/* webpackChunkName: "el-avatar" */ 'element-ui/lib/avatar'),
+		'el-image': () =>
+			import(/* webpackChunkName: "el-image" */ 'element-ui/lib/image'),
 	},
 	data() {
 		return {
