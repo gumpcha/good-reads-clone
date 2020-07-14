@@ -24,7 +24,8 @@ import {
 	PageHeader,
 } from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ko';
-import '../element-variables.scss';
+import 'element-ui/lib/theme-chalk/reset.css';
+// import '../element-variables.scss';
 
 Vue.use(Card, { locale });
 Vue.use(Container, { locale });
