@@ -92,13 +92,17 @@ summary,
 time,
 mark,
 audio,
-video {
+video,
+button,
+input,
+select,
+textarea {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font-family: Pacifico, sans-serif;
 	vertical-align: baseline;
+	font-family: inherit !important;
 }
 
 /* make sure to set some focus styles for accessibility */
