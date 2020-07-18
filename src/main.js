@@ -13,6 +13,7 @@ Vue.use(customPlugin);
 
 import '@/assets/scss/reset.scss';
 import '@/assets/scss/golbal.scss';
+import '@/element-variables.scss';
 
 Vue.config.productionTip = false;
 // TODO: replace vuex
