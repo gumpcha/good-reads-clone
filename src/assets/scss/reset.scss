@@ -90,6 +90,15 @@ video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	button,
+	input,
+	select,
+	textarea {
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		color: inherit;
+	}
 }
 
 /* make sure to set some focus styles for accessibility */
