@@ -1,5 +1,4 @@
 import Vue from 'vue';
-// import '@/plugins/element.js';
 import router from '@/router';
 import store from '@/store';
 import App from '@/App.vue';
@@ -13,7 +12,7 @@ Vue.use(customPlugin);
 
 import '@/assets/scss/reset.scss';
 import '@/assets/scss/golbal.scss';
-import '@/element-variables.scss';
+// import '@/element-variables.scss';
 
 Vue.config.productionTip = false;
 // TODO: replace vuex
