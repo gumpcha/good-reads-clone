@@ -1,3 +1,7 @@
+import '@/assets/scss/reset.scss';
+import '@/assets/scss/golbal.scss';
+import '@/element-variables.scss';
+
 import Vue from 'vue';
 import router from '@/router';
 import store from '@/store';
@@ -9,10 +13,6 @@ import Api from '@/api';
 import customPlugin from '@/plugins/custom.js';
 Vue.use(customPlugin);
 // ----------------------------------------------------------------
-
-import '@/assets/scss/reset.scss';
-import '@/assets/scss/golbal.scss';
-// import '@/element-variables.scss';
 
 Vue.config.productionTip = false;
 // TODO: replace vuex
