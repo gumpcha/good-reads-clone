@@ -99,6 +99,18 @@
 import { mapGetters } from 'vuex';
 import { mapMutations } from 'vuex';
 
+import {
+	Container,
+	Row,
+	Col,
+	Header,
+	Button,
+	Autocomplete,
+	Tooltip,
+	Avatar,
+	Image,
+} from 'element-ui';
+
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -110,40 +122,49 @@ library.add(faSignInAlt);
 
 // ----------------------------------------------------------------
 // NOTE: work for element ui
-import 'element-ui/lib/theme-chalk/container.css';
-import 'element-ui/lib/theme-chalk/row.css';
-import 'element-ui/lib/theme-chalk/col.css';
-import 'element-ui/lib/theme-chalk/header.css';
-import 'element-ui/lib/theme-chalk/button.css';
-import 'element-ui/lib/theme-chalk/autocomplete.css';
-import 'element-ui/lib/theme-chalk/tooltip.css';
-import 'element-ui/lib/theme-chalk/avatar.css';
-import 'element-ui/lib/theme-chalk/image.css';
+// import 'element-ui/lib/theme-chalk/container.css';
+// import 'element-ui/lib/theme-chalk/row.css';
+// import 'element-ui/lib/theme-chalk/col.css';
+// import 'element-ui/lib/theme-chalk/header.css';
+// import 'element-ui/lib/theme-chalk/button.css';
+// import 'element-ui/lib/theme-chalk/autocomplete.css';
+// import 'element-ui/lib/theme-chalk/tooltip.css';
+// import 'element-ui/lib/theme-chalk/avatar.css';
+// import 'element-ui/lib/theme-chalk/image.css';
 // ----------------------------------------------------------------
 
 export default {
 	name: 'AppHeader',
 	components: {
-		'el-container': () =>
-			import(/* webpackChunkName: "el-container" */ 'element-ui/lib/container'),
-		'el-row': () =>
-			import(/* webpackChunkName: "el-row" */ 'element-ui/lib/row'),
-		'el-col': () =>
-			import(/* webpackChunkName: "el-col" */ 'element-ui/lib/col'),
-		'el-header': () =>
-			import(/* webpackChunkName: "el-header" */ 'element-ui/lib/header'),
-		'el-button': () =>
-			import(/* webpackChunkName: "el-button" */ 'element-ui/lib/button'),
-		'el-autocomplete': () =>
-			import(
-				/* webpackChunkName: "el-autocomplete" */ 'element-ui/lib/autocomplete'
-			),
-		'el-tooltip': () =>
-			import(/* webpackChunkName: "el-tooltip" */ 'element-ui/lib/tooltip'),
-		'el-avatar': () =>
-			import(/* webpackChunkName: "el-avatar" */ 'element-ui/lib/avatar'),
-		'el-image': () =>
-			import(/* webpackChunkName: "el-image" */ 'element-ui/lib/image'),
+		'el-container': Container,
+		'el-row': Row,
+		'el-col': Col,
+		'el-header': Header,
+		'el-button': Button,
+		'el-autocomplete': Autocomplete,
+		'el-tooltip': Tooltip,
+		'el-avatar': Avatar,
+		'el-image': Image,
+		// 'el-container': () =>
+		// 	import(/* webpackChunkName: "el-container" */ 'element-ui/lib/container'),
+		// 'el-row': () =>
+		// 	import(/* webpackChunkName: "el-row" */ 'element-ui/lib/row'),
+		// 'el-col': () =>
+		// 	import(/* webpackChunkName: "el-col" */ 'element-ui/lib/col'),
+		// 'el-header': () =>
+		// 	import(/* webpackChunkName: "el-header" */ 'element-ui/lib/header'),
+		// 'el-button': () =>
+		// 	import(/* webpackChunkName: "el-button" */ 'element-ui/lib/button'),
+		// 'el-autocomplete': () =>
+		// 	import(
+		// 		/* webpackChunkName: "el-autocomplete" */ 'element-ui/lib/autocomplete'
+		// 	),
+		// 'el-tooltip': () =>
+		// 	import(/* webpackChunkName: "el-tooltip" */ 'element-ui/lib/tooltip'),
+		// 'el-avatar': () =>
+		// 	import(/* webpackChunkName: "el-avatar" */ 'element-ui/lib/avatar'),
+		// 'el-image': () =>
+		// 	import(/* webpackChunkName: "el-image" */ 'element-ui/lib/image'),
 	},
 	data() {
 		return {

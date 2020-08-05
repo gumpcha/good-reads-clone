@@ -57,6 +57,8 @@
 <script>
 import { mapMutations } from 'vuex';
 
+import { Card, PageHeader, Form, FormItem, Input, Button } from 'element-ui';
+
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -68,31 +70,23 @@ library.add(faEnvelopeSquare, faLock);
 
 // ----------------------------------------------------------------
 // NOTE: work for element ui
-import 'element-ui/lib/theme-chalk/card.css';
-import 'element-ui/lib/theme-chalk/page-header.css';
-import 'element-ui/lib/theme-chalk/form.css';
-import 'element-ui/lib/theme-chalk/form-item.css';
-import 'element-ui/lib/theme-chalk/input.css';
-import 'element-ui/lib/theme-chalk/button.css';
+// import 'element-ui/lib/theme-chalk/card.css';
+// import 'element-ui/lib/theme-chalk/page-header.css';
+// import 'element-ui/lib/theme-chalk/form.css';
+// import 'element-ui/lib/theme-chalk/form-item.css';
+// import 'element-ui/lib/theme-chalk/input.css';
+// import 'element-ui/lib/theme-chalk/button.css';
 // ----------------------------------------------------------------
 
 export default {
 	name: 'UserSignUp',
 	components: {
-		'el-card': () =>
-			import(/* webpackChunkName: "el-card" */ 'element-ui/lib/card'),
-		'el-form': () =>
-			import(/* webpackChunkName: "el-form" */ 'element-ui/lib/form'),
-		'el-page-header': () =>
-			import(
-				/* webpackChunkName: "el-page-header" */ 'element-ui/lib/page-header'
-			),
-		'el-form-item': () =>
-			import(/* webpackChunkName: "el-form-item" */ 'element-ui/lib/form-item'),
-		'el-input': () =>
-			import(/* webpackChunkName: "el-input" */ 'element-ui/lib/input'),
-		'el-button': () =>
-			import(/* webpackChunkName: "el-button" */ 'element-ui/lib/button'),
+		'el-card': Card,
+		'el-form': Form,
+		'el-page-header': PageHeader,
+		'el-form-item': FormItem,
+		'el-input': Input,
+		'el-button': Button,
 	},
 	data() {
 		let emailValidate = (rule, value, callback) => {

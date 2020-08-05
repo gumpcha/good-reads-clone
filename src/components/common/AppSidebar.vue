@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { Drawer, Menu, MenuItem } from 'element-ui';
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -46,20 +47,17 @@ library.add(faHome, faUser, faBook);
 
 // ----------------------------------------------------------------
 // NOTE: work for element ui
-import 'element-ui/lib/theme-chalk/drawer.css';
-import 'element-ui/lib/theme-chalk/menu.css';
-import 'element-ui/lib/theme-chalk/menu-item.css';
+// import 'element-ui/lib/theme-chalk/drawer.css';
+// import 'element-ui/lib/theme-chalk/menu.css';
+// import 'element-ui/lib/theme-chalk/menu-item.css';
 // ----------------------------------------------------------------
 
 export default {
 	name: 'AppSidebar',
 	components: {
-		'el-drawer': () =>
-			import(/* webpackChunkName: "el-drawer" */ 'element-ui/lib/drawer'),
-		'el-menu': () =>
-			import(/* webpackChunkName: "el-menu" */ 'element-ui/lib/menu'),
-		'el-menu-item': () =>
-			import(/* webpackChunkName: "el-menu-item" */ 'element-ui/lib/menu-item'),
+		'el-drawer': Drawer,
+		'el-menu': Menu,
+		'el-menu-item': MenuItem,
 	},
 	data() {
 		return {

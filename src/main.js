@@ -1,6 +1,6 @@
 import '@/assets/scss/reset.scss';
 import '@/assets/scss/golbal.scss';
-import '@/element-variables.scss';
+// import '@/element-variables.scss';
 
 import Vue from 'vue';
 import router from '@/router';
