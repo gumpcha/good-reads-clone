@@ -1,5 +1,24 @@
 import Vue from 'vue';
-import Element from 'element-ui';
+import {
+	Container,
+	Row,
+	Col,
+	Header,
+	Button,
+	Autocomplete,
+	Tooltip,
+	Avatar,
+	Image,
+	Drawer,
+	Menu,
+	MenuItem,
+	Main,
+	Card,
+	Form,
+	FormItem,
+	Input,
+	PageHeader,
+} from 'element-ui';
 import '@/assets/scss/reset.scss';
 import '@/assets/scss/golbal.scss';
 import router from '@/router';
@@ -12,7 +31,28 @@ import Api from '@/api';
 import customPlugin from '@/plugins/custom.js';
 // ----------------------------------------------------------------
 
-Vue.use(Element, customPlugin);
+Vue.use(
+	Container,
+	Row,
+	Col,
+	Header,
+	Button,
+	Autocomplete,
+	Tooltip,
+	Avatar,
+	Image,
+	Drawer,
+	Menu,
+	MenuItem,
+	Main,
+	Card,
+	Form,
+	FormItem,
+	Input,
+	PageHeader,
+);
+
+Vue.use(customPlugin);
 
 Vue.config.productionTip = false;
 // TODO: replace vuex
