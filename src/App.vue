@@ -1,20 +1,21 @@
 <template>
 	<div id="app">
-		<!-- <component :is="$route.meta.layout"></component> -->
-		<complex-layout></complex-layout>
+		<component :is="$route.meta.layout"></component>
 	</div>
 </template>
 
 <script>
 import ComplexLayout from '@/components/layout/ComplexLayout';
-// import SingleLayout from '@/components/layout/SingleLayout';
-// import { Message } from 'element-ui';
+import SingleLayout from '@/components/layout/SingleLayout';
+import { Message } from 'element-ui';
 import { messageService } from '@/message';
 
 export default {
 	name: 'App',
 	components: {
 		ComplexLayout,
+		SingleLayout,
+		Message,
 	},
 	data() {
 		return {
