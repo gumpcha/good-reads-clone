@@ -57,7 +57,7 @@
 <script>
 import { mapMutations } from 'vuex';
 
-import { Card, PageHeader, Form, FormItem, Input, Button } from 'element-ui';
+// import { Card, PageHeader, Form, FormItem, Input, Button } from 'element-ui';
 
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
@@ -80,14 +80,6 @@ library.add(faEnvelopeSquare, faLock);
 
 export default {
 	name: 'UserSignUp',
-	components: {
-		'el-card': Card,
-		'el-form': Form,
-		'el-page-header': PageHeader,
-		'el-form-item': FormItem,
-		'el-input': Input,
-		'el-button': Button,
-	},
 	data() {
 		let emailValidate = (rule, value, callback) => {
 			const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

@@ -14,7 +14,7 @@ import AppSidebar from '@/components/common/AppSidebar';
 
 // ----------------------------------------------------------------
 // NOTE: work for element ui
-import 'element-ui/lib/theme-chalk/main.css';
+// import 'element-ui/lib/theme-chalk/main.css';
 // ----------------------------------------------------------------
 
 export default {
@@ -22,8 +22,6 @@ export default {
 	components: {
 		AppHeader,
 		AppSidebar,
-		'el-main': () =>
-			import(/* webpackChunkName: "el-main" */ 'element-ui/lib/main'),
 	},
 	methods: {},
 };
