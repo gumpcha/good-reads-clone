@@ -1,16 +1,11 @@
 import Vue from 'vue';
+import Element from 'element-ui';
+import '@/assets/scss/reset.scss';
+import '@/assets/scss/golbal.scss';
 import router from '@/router';
 import store from '@/store';
 import App from '@/App.vue';
 import Api from '@/api';
-
-// ----------------------------------------------------------------
-// NOTE: element-ui
-import Element from 'element-ui';
-import '@/assets/scss/reset.scss';
-import '@/assets/scss/golbal.scss';
-import '@/element-variables.scss';
-// ----------------------------------------------------------------
 
 // ----------------------------------------------------------------
 // NOTE: plugin
