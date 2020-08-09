@@ -35,7 +35,6 @@
 </template>
 
 <script>
-// import { Drawer, Menu, MenuItem } from 'element-ui';
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -43,13 +42,6 @@ import { faHome, faUser, faBook } from '@fortawesome/free-solid-svg-icons';
 import { dom } from '@fortawesome/fontawesome-svg-core'; // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 library.add(faHome, faUser, faBook);
-// ----------------------------------------------------------------
-
-// ----------------------------------------------------------------
-// NOTE: work for element ui
-// import 'element-ui/lib/theme-chalk/drawer.css';
-// import 'element-ui/lib/theme-chalk/menu.css';
-// import 'element-ui/lib/theme-chalk/menu-item.css';
 // ----------------------------------------------------------------
 
 export default {

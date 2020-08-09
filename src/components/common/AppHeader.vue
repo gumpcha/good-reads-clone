@@ -6,7 +6,7 @@
 					<el-row>
 						<el-col :xs="4" :sm="2" :md="2" :lg="2" :xl="2">
 							<el-button
-								icon="el-icon-menu"
+								icon="fas fa-bars"
 								@click="toggleDrawer"
 								circle
 							></el-button>
@@ -26,7 +26,7 @@
 									<el-button
 										@click="handleIconClick"
 										slot="append"
-										icon="el-icon-search"
+										icon="fas fa-search"
 									></el-button>
 									<template slot-scope="{ item }">
 										<el-image
@@ -59,7 +59,7 @@
 									class="avatar"
 									:size="avatar.size"
 									:src="avatar.src"
-									:icon="avatar.src ? null : 'el-icon-user-solid'"
+									:icon="avatar.src ? null : 'fas fa-user'"
 								></el-avatar>
 								<el-dropdown-menu slot="dropdown" size="mini" split-button>
 									<el-dropdown-item
@@ -99,38 +99,18 @@
 import { mapGetters } from 'vuex';
 import { mapMutations } from 'vuex';
 
-// import {
-// 	Container,
-// 	Row,
-// 	Col,
-// 	Header,
-// 	Button,
-// 	Autocomplete,
-// 	Tooltip,
-// 	Avatar,
-// 	Image,
-// } from 'element-ui';
-
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+	faSignInAlt,
+	faBars,
+	faSearch,
+	faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import { dom } from '@fortawesome/fontawesome-svg-core'; // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-library.add(faSignInAlt);
-// ----------------------------------------------------------------
-
-// ----------------------------------------------------------------
-// NOTE: work for element ui
-// import 'element-ui/lib/theme-chalk/container.css';
-// import 'element-ui/lib/theme-chalk/row.css';
-// import 'element-ui/lib/theme-chalk/col.css';
-// import 'element-ui/lib/theme-chalk/header.css';
-// import 'element-ui/lib/theme-chalk/button.css';
-// import 'element-ui/lib/theme-chalk/autocomplete.css';
-// import 'element-ui/lib/theme-chalk/tooltip.css';
-// import 'element-ui/lib/theme-chalk/avatar.css';
-// import 'element-ui/lib/theme-chalk/image.css';
+library.add(faSignInAlt, faBars, faSearch, faUser);
 // ----------------------------------------------------------------
 
 export default {
@@ -281,7 +261,7 @@ export default {
 	.el-input-group__append {
 		background-color: #409eff;
 	}
-	.el-icon-search {
+	.fa-search {
 		color: #fff;
 	}
 }

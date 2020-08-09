@@ -17,7 +17,7 @@
 					<el-button
 						v-if="model.email"
 						slot="append"
-						icon="el-icon-close"
+						icon="fa-times"
 						@click="model.email = null"
 					></el-button>
 				</el-input>
@@ -33,7 +33,7 @@
 					<el-button
 						v-if="model.password"
 						slot="append"
-						icon="el-icon-close"
+						icon="fa-times"
 						@click="model.password = null"
 					></el-button>
 				</el-input>
@@ -62,10 +62,14 @@ import { mapMutations } from 'vuex';
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEnvelopeSquare, faLock } from '@fortawesome/free-solid-svg-icons';
+import {
+	faEnvelopeSquare,
+	faLock,
+	faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 import { dom } from '@fortawesome/fontawesome-svg-core'; // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-library.add(faEnvelopeSquare, faLock);
+library.add(faEnvelopeSquare, faLock, faTimes);
 // ----------------------------------------------------------------
 
 // ----------------------------------------------------------------
