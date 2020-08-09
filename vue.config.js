@@ -16,12 +16,21 @@ module.exports = {
 			hints: false,
 		},
 		optimization: {
-			// splitChunks: {
-			// 	minSize: 10000,
-			// 	maxSize: 250000,
-			// 	chunks: 'all',
-			// },
-			// usedExports: true,
+			splitChunks: {
+				cacheGroups: {
+					vendor: {
+						chunks: 'initial',
+						name: 'vendor',
+						enforce: true,
+					},
+				},
+			},
+			// 	splitChunks: {
+			// 		minSize: 10000,
+			// 		maxSize: 250000,
+			// 		chunks: 'all',
+			// 	},
+			// 	usedExports: true,
 		},
 		plugins: [
 			new CleanWebpackPlugin(),
