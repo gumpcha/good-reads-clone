@@ -96,20 +96,18 @@
 </template>
 
 <script>
-// import {
-// 	Avatar,
-// 	Autocomplete,
-// 	Button,
-// 	Col,
-// 	Container,
-// 	Header,
-// 	Image,
-// 	Row,
-// 	Tooltip,
-// } from 'element-ui';
-import { mapGetters } from 'vuex';
-import { mapMutations } from 'vuex';
-
+// ----------------------------------------------------------------
+// NOTE: work for element ui
+import 'element-ui/lib/theme-chalk/avatar.css';
+import 'element-ui/lib/theme-chalk/autocomplete.css';
+import 'element-ui/lib/theme-chalk/button.css';
+import 'element-ui/lib/theme-chalk/col.css';
+import 'element-ui/lib/theme-chalk/container.css';
+import 'element-ui/lib/theme-chalk/header.css';
+import 'element-ui/lib/theme-chalk/image.css';
+import 'element-ui/lib/theme-chalk/row.css';
+import 'element-ui/lib/theme-chalk/tooltip.css';
+// ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -123,19 +121,8 @@ import { dom } from '@fortawesome/fontawesome-svg-core'; // This will kick of th
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 library.add(faSignInAlt, faBars, faSearch, faUser);
 // ----------------------------------------------------------------
-
-// ----------------------------------------------------------------
-// NOTE: work for element ui
-// import 'element-ui/lib/theme-chalk/avatar.css';
-// import 'element-ui/lib/theme-chalk/autocomplete.css';
-// import 'element-ui/lib/theme-chalk/button.css';
-// import 'element-ui/lib/theme-chalk/col.css';
-// import 'element-ui/lib/theme-chalk/container.css';
-// import 'element-ui/lib/theme-chalk/header.css';
-// import 'element-ui/lib/theme-chalk/image.css';
-// import 'element-ui/lib/theme-chalk/row.css';
-// import 'element-ui/lib/theme-chalk/tooltip.css';
-// ----------------------------------------------------------------
+import { mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: 'AppHeader',

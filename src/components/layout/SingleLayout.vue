@@ -7,7 +7,10 @@
 </template>
 
 <script>
-// import { Main } from 'element-ui';
+// ----------------------------------------------------------------
+// NOTE: work for element ui
+import 'element-ui/lib/theme-chalk/main.css';
+// ----------------------------------------------------------------
 
 export default {
 	name: 'SingleLayout',

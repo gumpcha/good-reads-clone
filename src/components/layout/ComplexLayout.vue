@@ -9,14 +9,12 @@
 </template>
 
 <script>
-// import { Main } from 'element-ui';
-import AppHeader from '@/components/common/AppHeader';
-import AppSidebar from '@/components/common/AppSidebar';
-
 // ----------------------------------------------------------------
 // NOTE: work for element ui
-// import 'element-ui/lib/theme-chalk/main.css';
+import 'element-ui/lib/theme-chalk/main.css';
 // ----------------------------------------------------------------
+import AppHeader from '@/components/common/AppHeader';
+import AppSidebar from '@/components/common/AppSidebar';
 
 export default {
 	name: 'ComplexLayout',
