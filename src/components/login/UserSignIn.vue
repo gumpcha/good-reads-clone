@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { Button, Card, Input, Form, FormItem } from 'element-ui';
+// import { Button, Card, Input, Form, FormItem } from 'element-ui';
 import { mapMutations } from 'vuex';
 
 // ----------------------------------------------------------------
@@ -73,11 +73,16 @@ library.add(faEnvelopeSquare, faLock, faTimes);
 export default {
 	name: 'UserSignIn',
 	components: {
-		'el-card': Card,
-		'el-button': Button,
-		'el-input': Input,
-		'el-form': Form,
-		'el-form-item': FormItem,
+		'el-card': () =>
+			import(/* webpackChunkName: "el-card" */ 'element-ui/lib/card'),
+		'el-button': () =>
+			import(/* webpackChunkName: "el-button" */ 'element-ui/lib/button'),
+		'el-input': () =>
+			import(/* webpackChunkName: "el-input" */ 'element-ui/lib/input'),
+		'el-form': () =>
+			import(/* webpackChunkName: "el-form" */ 'element-ui/lib/form'),
+		'el-form-item': () =>
+			import(/* webpackChunkName: "el-form-item" */ 'element-ui/lib/form-item'),
 	},
 	data() {
 		let emailValidate = (rule, value, callback) => {

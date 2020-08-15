@@ -96,17 +96,17 @@
 </template>
 
 <script>
-import {
-	Avatar,
-	Autocomplete,
-	Button,
-	Col,
-	Container,
-	Header,
-	Image,
-	Row,
-	Tooltip,
-} from 'element-ui';
+// import {
+// 	Avatar,
+// 	Autocomplete,
+// 	Button,
+// 	Col,
+// 	Container,
+// 	Header,
+// 	Image,
+// 	Row,
+// 	Tooltip,
+// } from 'element-ui';
 import { mapGetters } from 'vuex';
 import { mapMutations } from 'vuex';
 
@@ -124,18 +124,42 @@ dom.watch(); // This will kick of the initial replacement of i to svg tags and c
 library.add(faSignInAlt, faBars, faSearch, faUser);
 // ----------------------------------------------------------------
 
+// ----------------------------------------------------------------
+// NOTE: work for element ui
+// import 'element-ui/lib/theme-chalk/avatar.css';
+// import 'element-ui/lib/theme-chalk/autocomplete.css';
+// import 'element-ui/lib/theme-chalk/button.css';
+// import 'element-ui/lib/theme-chalk/col.css';
+// import 'element-ui/lib/theme-chalk/container.css';
+// import 'element-ui/lib/theme-chalk/header.css';
+// import 'element-ui/lib/theme-chalk/image.css';
+// import 'element-ui/lib/theme-chalk/row.css';
+// import 'element-ui/lib/theme-chalk/tooltip.css';
+// ----------------------------------------------------------------
+
 export default {
 	name: 'AppHeader',
 	components: {
-		'el-avatar': Avatar,
-		'el-autocomplete': Autocomplete,
-		'el-button': Button,
-		'el-col': Col,
-		'el-container': Container,
-		'el-header': Header,
-		'el-image': Image,
-		'el-row': Row,
-		'el-tooltip': Tooltip,
+		'el-avatar': () =>
+			import(/* webpackChunkName: "el-avatar" */ 'element-ui/lib/avatar'),
+		'el-autocomplete': () =>
+			import(
+				/* webpackChunkName: "el-autocomplete" */ 'element-ui/lib/autocomplete'
+			),
+		'el-button': () =>
+			import(/* webpackChunkName: "el-button" */ 'element-ui/lib/button'),
+		'el-col': () =>
+			import(/* webpackChunkName: "el-col" */ 'element-ui/lib/col'),
+		'el-container': () =>
+			import(/* webpackChunkName: "el-container" */ 'element-ui/lib/container'),
+		'el-header': () =>
+			import(/* webpackChunkName: "el-header" */ 'element-ui/lib/header'),
+		'el-image': () =>
+			import(/* webpackChunkName: "el-image" */ 'element-ui/lib/image'),
+		'el-row': () =>
+			import(/* webpackChunkName: "el-row" */ 'element-ui/lib/row'),
+		'el-tooltip': () =>
+			import(/* webpackChunkName: "el-tooltip" */ 'element-ui/lib/tooltip'),
 	},
 	data() {
 		return {

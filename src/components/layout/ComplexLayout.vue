@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Main } from 'element-ui';
+// import { Main } from 'element-ui';
 import AppHeader from '@/components/common/AppHeader';
 import AppSidebar from '@/components/common/AppSidebar';
 
@@ -21,7 +21,8 @@ import AppSidebar from '@/components/common/AppSidebar';
 export default {
 	name: 'ComplexLayout',
 	components: {
-		'el-main': Main,
+		'el-main': () =>
+			import(/* webpackChunkName: "el-main" */ 'element-ui/lib/main'),
 		AppHeader,
 		AppSidebar,
 	},

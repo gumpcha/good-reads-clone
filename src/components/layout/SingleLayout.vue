@@ -7,11 +7,14 @@
 </template>
 
 <script>
-import { Main } from 'element-ui';
+// import { Main } from 'element-ui';
 
 export default {
 	name: 'SingleLayout',
-	components: { 'el-main': Main },
+	components: {
+		'el-main': () =>
+			import(/* webpackChunkName: "el-main" */ 'element-ui/lib/main'),
+	},
 };
 </script>
 
