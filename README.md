@@ -6,6 +6,14 @@ Nomad Coders Online Hackerthon 과제
 
 > Nomad Coders Online Hackerthon 과제
 
+## Style Convention
+### Vue.js
+- [single component options order](https://kr.vuejs.org/v2/style-guide/#%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EC%98%B5%EC%85%98-%EC%88%9C%EC%84%9C-%EC%B6%94%EC%B2%9C%ED%95%A8)
+
+### Javascript
+- [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
+
+
 ## 앱 기능
 
 - [ ] Log In/Sign Up

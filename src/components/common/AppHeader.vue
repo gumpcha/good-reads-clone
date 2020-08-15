@@ -96,6 +96,17 @@
 </template>
 
 <script>
+import {
+	Avatar,
+	Autocomplete,
+	Button,
+	Col,
+	Container,
+	Header,
+	Image,
+	Row,
+	Tooltip,
+} from 'element-ui';
 import { mapGetters } from 'vuex';
 import { mapMutations } from 'vuex';
 
@@ -115,6 +126,17 @@ library.add(faSignInAlt, faBars, faSearch, faUser);
 
 export default {
 	name: 'AppHeader',
+	components: {
+		'el-avatar': Avatar,
+		'el-autocomplete': Autocomplete,
+		'el-button': Button,
+		'el-col': Col,
+		'el-container': Container,
+		'el-header': Header,
+		'el-image': Image,
+		'el-row': Row,
+		'el-tooltip': Tooltip,
+	},
 	data() {
 		return {
 			links: [],
@@ -138,6 +160,13 @@ export default {
 				},
 			],
 		};
+	},
+	computed: {
+		// getter를 객체 전개 연산자(Object Spread Operator)로 계산하여 추가합니다.
+		...mapGetters(['isLoggedIn', 'getAccessToken']),
+	},
+	mounted() {
+		this.links = this.loadAll();
 	},
 	methods: {
 		...mapMutations(['authRequest', 'authSuccess', 'authError', 'logout']),
@@ -245,13 +274,6 @@ export default {
 				this.$router.push({ name: command });
 			}
 		},
-	},
-	computed: {
-		// getter를 객체 전개 연산자(Object Spread Operator)로 계산하여 추가합니다.
-		...mapGetters(['isLoggedIn', 'getAccessToken']),
-	},
-	mounted() {
-		this.links = this.loadAll();
 	},
 };
 </script>

@@ -54,9 +54,8 @@
 </template>
 
 <script>
+import { Button, Card, Input, Form, FormItem } from 'element-ui';
 import { mapMutations } from 'vuex';
-
-// import { Card, Form, FormItem, Input, Button } from 'element-ui';
 
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
@@ -71,17 +70,15 @@ dom.watch(); // This will kick of the initial replacement of i to svg tags and c
 library.add(faEnvelopeSquare, faLock, faTimes);
 // ----------------------------------------------------------------
 
-// ----------------------------------------------------------------
-// NOTE: work for element ui
-// import 'element-ui/lib/theme-chalk/card.css';
-// import 'element-ui/lib/theme-chalk/form.css';
-// import 'element-ui/lib/theme-chalk/form-item.css';
-// import 'element-ui/lib/theme-chalk/input.css';
-// import 'element-ui/lib/theme-chalk/button.css';
-// ----------------------------------------------------------------
-
 export default {
 	name: 'UserSignIn',
+	components: {
+		'el-card': Card,
+		'el-button': Button,
+		'el-input': Input,
+		'el-form': Form,
+		'el-form-item': FormItem,
+	},
 	data() {
 		let emailValidate = (rule, value, callback) => {
 			const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -148,6 +145,11 @@ export default {
 			},
 		};
 	},
+	computed: {
+		disabledButton() {
+			return !this.validation.email || !this.validation.password;
+		},
+	},
 	methods: {
 		...mapMutations(['authRequest', 'authSuccess', 'authError']),
 		async signIn() {
@@ -187,11 +189,6 @@ export default {
 		},
 		goSignUp() {
 			this.$router.push({ name: 'signUp' });
-		},
-	},
-	computed: {
-		disabledButton() {
-			return !this.validation.email || !this.validation.password;
 		},
 	},
 };

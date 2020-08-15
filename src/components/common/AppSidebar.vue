@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { Drawer, Menu, MenuItem } from 'element-ui';
 // ----------------------------------------------------------------
 // NOTE: work for font awesome5
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -46,20 +47,17 @@ library.add(faHome, faUser, faBook);
 
 export default {
 	name: 'AppSidebar',
+	components: {
+		'el-drawer': Drawer,
+		'el-menu': Menu,
+		'el-menu-item': MenuItem,
+	},
 	data() {
 		return {
 			drawer: false,
 			direction: 'ltr',
 			active: 'home',
 		};
-	},
-	methods: {
-		handleClose(done) {
-			done();
-		},
-		goToPage(name) {
-			this.$router.push({ name: name }, () => {});
-		},
 	},
 	watch: {
 		$route(to, from) {
@@ -73,6 +71,14 @@ export default {
 		this.$bus.$on('toggle', bool => {
 			this.drawer = bool;
 		});
+	},
+	methods: {
+		handleClose(done) {
+			done();
+		},
+		goToPage(name) {
+			this.$router.push({ name: name }, () => {});
+		},
 	},
 };
 </script>

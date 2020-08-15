@@ -7,8 +7,11 @@
 </template>
 
 <script>
+import { Main } from 'element-ui';
+
 export default {
 	name: 'SingleLayout',
+	components: { 'el-main': Main },
 };
 </script>
 
