@@ -15,12 +15,6 @@ export default {
 	components: {
 		ComplexLayout,
 		SingleLayout,
-		Message,
-	},
-	data() {
-		return {
-			// layout: ComplexLayout,
-		};
 	},
 	created() {
 		// subscribe to home component messages
@@ -41,7 +35,7 @@ export default {
 	},
 	methods: {
 		setMessage(param) {
-			this.$message({
+			Message({
 				showClose: true,
 				dangerouslyUseHTMLString: true,
 				type: param.type,

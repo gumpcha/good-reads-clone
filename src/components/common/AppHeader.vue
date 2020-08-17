@@ -103,6 +103,9 @@ import 'element-ui/lib/theme-chalk/autocomplete.css';
 import 'element-ui/lib/theme-chalk/button.css';
 import 'element-ui/lib/theme-chalk/col.css';
 import 'element-ui/lib/theme-chalk/container.css';
+import 'element-ui/lib/theme-chalk/dropdown.css';
+import 'element-ui/lib/theme-chalk/dropdown-item.css';
+import 'element-ui/lib/theme-chalk/dropdown-menu.css';
 import 'element-ui/lib/theme-chalk/header.css';
 import 'element-ui/lib/theme-chalk/image.css';
 import 'element-ui/lib/theme-chalk/row.css';
@@ -139,6 +142,16 @@ export default {
 			import(/* webpackChunkName: "el-col" */ 'element-ui/lib/col'),
 		'el-container': () =>
 			import(/* webpackChunkName: "el-container" */ 'element-ui/lib/container'),
+		'el-dropdown': () =>
+			import(/* webpackChunkName: "el-dropdown" */ 'element-ui/lib/dropdown'),
+		'el-dropdown-item': () =>
+			import(
+				/* webpackChunkName: "el-dropdown-item" */ 'element-ui/lib/dropdown-item'
+			),
+		'el-dropdown-menu': () =>
+			import(
+				/* webpackChunkName: "el-dropdown-menu" */ 'element-ui/lib/dropdown-menu'
+			),
 		'el-header': () =>
 			import(/* webpackChunkName: "el-header" */ 'element-ui/lib/header'),
 		'el-image': () =>

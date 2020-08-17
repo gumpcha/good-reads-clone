@@ -9,12 +9,15 @@
 <script>
 // ----------------------------------------------------------------
 // NOTE: work for element ui
+import 'element-ui/lib/theme-chalk/container.css';
 import 'element-ui/lib/theme-chalk/main.css';
 // ----------------------------------------------------------------
 
 export default {
 	name: 'SingleLayout',
 	components: {
+		'el-container': () =>
+			import(/* webpackChunkName: "el-container" */ 'element-ui/lib/container'),
 		'el-main': () =>
 			import(/* webpackChunkName: "el-main" */ 'element-ui/lib/main'),
 	},
