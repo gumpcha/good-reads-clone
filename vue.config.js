@@ -19,17 +19,17 @@ module.exports = {
 		optimization: {
 			splitChunks: {
 				cacheGroups: {
-					vendor: {
-						chunks: 'initial',
-						name: 'vendor',
-						enforce: true,
-					},
-					// shared: {
-					// 	test: /[\\/]node_modules[\\/]/,
+					// vendor: {
+					// 	chunks: 'initial',
 					// 	name: 'vendor',
 					// 	enforce: true,
-					// 	chunks: 'all',
 					// },
+					shared: {
+						test: /[\\/]node_modules[\\/]/,
+						name: 'vendor',
+						enforce: true,
+						chunks: 'all',
+					},
 				},
 			},
 			// 	splitChunks: {
