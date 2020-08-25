@@ -24,12 +24,22 @@ module.exports = {
 					// 	name: 'vendor',
 					// 	enforce: true,
 					// },
-					shared: {
+					commons: {
 						test: /[\\/]node_modules[\\/]/,
-						name: 'vendor',
-						enforce: true,
+						name: 'vendors',
 						chunks: 'all',
 					},
+					// commons: {
+					// 	name: 'vendor',
+					// 	test: /[\\/]node_modules[\\/]/,
+					// 	minChunks: 2,
+					// },
+					// shared: {
+					// 	test: /[\\/]node_modules[\\/]/,
+					// 	name: 'vendor',
+					// 	enforce: true,
+					// 	chunks: 'all',
+					// },
 				},
 			},
 			// 	splitChunks: {
