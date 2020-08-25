@@ -52,7 +52,6 @@
 						>
 							<el-dropdown
 								v-if="isLoggedIn"
-								lazy="true"
 								trigger="click"
 								@command="handleCommand"
 							>
@@ -268,6 +267,7 @@ export default {
 			cb(results);
 		},
 		toggleDrawer() {
+			console.log('toggleDrawer');
 			// TODO: replace vuex
 			this.$bus.$emit('toggle', true);
 		},

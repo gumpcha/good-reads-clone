@@ -2,8 +2,8 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // TODO: remove
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-// 	.BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+	.BundleAnalyzerPlugin;
 
 module.exports = {
 	configureWebpack: {
@@ -24,12 +24,12 @@ module.exports = {
 						name: 'vendor',
 						enforce: true,
 					},
-					shared: {
-						test: /[\\/]node_modules[\\/]/,
-						name: 'vendor',
-						enforce: true,
-						chunks: 'all',
-					},
+					// shared: {
+					// 	test: /[\\/]node_modules[\\/]/,
+					// 	name: 'vendor',
+					// 	enforce: true,
+					// 	chunks: 'all',
+					// },
 				},
 			},
 			// 	splitChunks: {
@@ -45,9 +45,9 @@ module.exports = {
 				filename: '[name].css',
 			}),
 			// TODO: remove
-			// new BundleAnalyzerPlugin({
-			// 	analyzerMode: 'static',
-			// }),
+			new BundleAnalyzerPlugin({
+				analyzerMode: 'static',
+			}),
 		],
 	},
 };
