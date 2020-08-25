@@ -27,7 +27,7 @@ module.exports = {
 					commons: {
 						test: /[\\/]node_modules[\\/]/,
 						name: 'vendors',
-						chunks: 'all',
+						enforce: true,
 					},
 					// commons: {
 					// 	name: 'vendor',
