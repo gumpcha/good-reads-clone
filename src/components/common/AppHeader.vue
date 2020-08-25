@@ -52,6 +52,7 @@
 						>
 							<el-dropdown
 								v-if="isLoggedIn"
+								lazy="true"
 								trigger="click"
 								@command="handleCommand"
 							>
