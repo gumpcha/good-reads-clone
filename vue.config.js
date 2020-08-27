@@ -34,11 +34,11 @@ module.exports = {
 					// 	test: /[\\/]node_modules[\\/]/,
 					// 	minChunks: 2,
 					// },
-					shared: {
-						test: /[\\/]node_modules[\\/]/,
-						name: 'vendor',
-						enforce: true,
-					},
+					// shared: {
+					// 	test: /[\\/]node_modules[\\/]/,
+					// 	name: 'vendor',
+					// 	enforce: true,
+					// },
 				},
 			},
 			// 	splitChunks: {
