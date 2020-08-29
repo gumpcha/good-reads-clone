@@ -31,6 +31,12 @@ module.exports = {
 			// 	},
 			// 	usedExports: true,
 		},
-		plugins: [new CleanWebpackPlugin(), new BundleAnalyzerPlugin()],
+		plugins: [
+			new CleanWebpackPlugin(),
+			new BundleAnalyzerPlugin({
+				analyzerMode: 'static',
+				openAnalyzer: false,
+			}),
+		],
 	},
 };
