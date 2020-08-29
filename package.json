@@ -2,7 +2,6 @@
   "name": "good-reads-clone",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://good-reads-clone-api-express.herokuapp.com",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -22,6 +21,8 @@
     "vuex": "^3.5.1"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "@fullhuman/vue-cli-plugin-purgecss": "^2.2.0",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-e2e-cypress": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
@@ -42,5 +43,6 @@
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.12",
     "webpack-bundle-analyzer": "^3.8.0"
-  }
+  },
+  "proxy": "https://good-reads-clone-api-express.herokuapp.com"
 }
