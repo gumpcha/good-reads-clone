@@ -267,9 +267,8 @@ export default {
 			cb(results);
 		},
 		toggleDrawer() {
-			console.log('toggleDrawer');
-			// TODO: replace vuex
-			this.$bus.$emit('toggle', true);
+			this.$bus.$emit('showDrawer');
+			this.$bus.$emit('toggleDrawer', true);
 		},
 		goToLogin() {
 			this.$router.push({ name: 'signIn' });

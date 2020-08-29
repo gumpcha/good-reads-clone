@@ -75,8 +75,7 @@ export default {
 		},
 	},
 	mounted() {
-		// TODO: replace vuex
-		this.$bus.$on('toggle', bool => {
+		this.$bus.$on('toggleDrawer', bool => {
 			this.drawer = bool;
 		});
 	},

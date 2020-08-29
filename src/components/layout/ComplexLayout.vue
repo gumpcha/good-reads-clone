@@ -1,7 +1,7 @@
 <template>
 	<div class="app-container">
 		<app-header></app-header>
-		<app-sidebar></app-sidebar>
+		<app-sidebar v-if="isShowDrawer"></app-sidebar>
 		<el-main class="complex-main">
 			<router-view></router-view>
 		</el-main>
@@ -14,15 +14,29 @@
 import 'element-ui/lib/theme-chalk/main.css';
 // ----------------------------------------------------------------
 import AppHeader from '@/components/common/AppHeader';
-import AppSidebar from '@/components/common/AppSidebar';
 
 export default {
 	name: 'ComplexLayout',
 	components: {
 		'el-main': () =>
 			import(/* webpackChunkName: "el-main" */ 'element-ui/lib/main'),
+		'app-sidebar': () => import('@/components/common/AppSidebar'),
 		AppHeader,
-		AppSidebar,
+	},
+	data() {
+		return {
+			isShowDrawer: false,
+		};
+	},
+	mounted() {
+		// 첫번째 이벤트만 수신
+		this.$bus.$once('showDrawer', () => {
+			this.isShowDrawer = true;
+			const vm = this;
+			setTimeout(() => {
+				vm.$bus.$emit('toggleDrawer', true);
+			}, 100);
+		});
 	},
 };
 </script>
