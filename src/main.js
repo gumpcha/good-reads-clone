@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import '@/assets/scss/reset.scss';
+// import '@/assets/scss/reset.scss';
 import '@/assets/scss/golbal.scss';
 import router from '@/router';
 import store from '@/store';
